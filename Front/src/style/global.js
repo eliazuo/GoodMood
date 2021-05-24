@@ -2,19 +2,18 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     logInIcons: {
-        paddingRight: "5px"
+        paddingRight: 5
     },
     logInLogo: {
         width: "100%", 
-        height: "70px",
-        marginBottom: "50px"
+        height: 70,
+        marginBottom: 50
     },
     button: {
         backgroundColor:  "#6a09b5",
-        borderRadius: "1.5rem",
-        margin: "30px"
+        borderRadius: 25,
+        margin: 30
     },
     inputFocus: {
-        border: "5px solid red"
     }
 });

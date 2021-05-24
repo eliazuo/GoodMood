@@ -63,10 +63,10 @@ class LogIn extends Component {
             )
         }
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', margin: '35px' }}>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', margin: 35 }}>
                 <View style={{ width:"100%", position: "absolute", top: "15%" }}>
                     <Image
-                        source={{ uri: logo }}
+                        source={require('../icons/logo.png')}
                         style={globalStyle.logInLogo}
                         resizeMode="contain"
                     />
