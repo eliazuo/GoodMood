@@ -5,8 +5,8 @@ import globalStyle from '../style/global.js';
 import { AntDesign } from '@expo/vector-icons'; 
 import logo from '../icons/logo.png';
 import Parse from "parse/react-native.js";
-import Navbar from '../components/Navbar';
-import Headerbar from '../components/Headerbar';
+import MainApp from './MainApp';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class LogIn extends Component {
@@ -16,8 +16,7 @@ class LogIn extends Component {
         this.state = { 
             userInput: "",
             passwordInput: "",
-            errorLogin: "",
-            isUserConnected: false
+            errorLogin: ""
         };
         this.tryToLogIn = this.tryToLogIn.bind(this);
         this.successfullLoginCallback = this.successfullLoginCallback.bind(this);
@@ -45,49 +44,51 @@ class LogIn extends Component {
     successfullLoginCallback(user){
         var that = this;
         AsyncStorage.setItem('user', JSON.stringify(user)).then(() => {
-            that.setState({ isUserConnected: true });
+            that.props.navigation.navigate('MainApp');
         })
     }
 
     unsuccessfullLoginCallback(){
-        this.setState({ errorLogin: "Invalid username or password" });
+        this.setState({ errorLogin: "Compte ou mot de passe incorrect" });
     }
 
     render() {
-        if (this.state.isUserConnected){
-            return (
-                <>
-                    <Headerbar></Headerbar>
-                    <Navbar></Navbar>
-                </>
-            )
-        }
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', margin: 35 }}>
-                <View style={{ width:"100%", position: "absolute", top: "15%" }}>
+                <View style={{ width:"100%"}}>
                     <Image
                         source={require('../icons/logo.png')}
                         style={globalStyle.logInLogo}
                         resizeMode="contain"
                     />
                     <Input
-                        placeholder="Username"
+                        placeholder="Pseudo"
                         leftIcon={<AntDesign name="user" size={24} color="black" style={globalStyle.logInIcons}/>}
                         onChangeText={value => this.setState({ userInput: value })}
                     />
                     <Input 
-                        placeholder="Password" 
+                        placeholder="Mot de passe" 
                         leftIcon={<AntDesign name="lock1" size={24} color="black" style={globalStyle.logInIcons}/>}
                         secureTextEntry={true} 
                         onChangeText={value => this.setState({ passwordInput: value })}
                         errorMessage={this.state.errorLogin}
                         
                     />
-                    <Button title="Log in"
+                    <Button title="Connexion"
                             containerStyle={globalStyle.buttonContainer}
                             buttonStyle={globalStyle.button}
                             onPress={this.tryToLogIn}/>
-                </View>     
+
+                    <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                        <Text>Pas encore de compte ? </Text>
+                        <Text style={{color : 'blue'}} onPress={() => this.props.navigation.navigate('SignIn')}>Inscris-toi !</Text>
+                    </View>
+                </View>    
+                
+                <View style={{ width:"100%", position: "absolute", bottom: 0, flexDirection: 'row', justifyContent: 'space-between' }}>  
+                    <Text onPress={() => this.props.navigation.navigate('CGU')}>CGU</Text>
+                    <Text onPress={() => this.props.navigation.navigate('ContactUs')}>Nous contacter</Text>
+                </View> 
             </View>
         );
     }
