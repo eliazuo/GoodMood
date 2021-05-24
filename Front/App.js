@@ -25,7 +25,7 @@ export default function App() {
     const Stack = createStackNavigator();
     return (
         <SafeAreaProvider>
-            <NavigationContainer >
+            <NavigationContainer>
             {/* <LogIn></LogIn> */}
                 <Stack.Navigator initialRouteName="LogIn" screenOptions={{headerShown: false}}>
                     <Stack.Screen name="LogIn" component={LogIn}/>

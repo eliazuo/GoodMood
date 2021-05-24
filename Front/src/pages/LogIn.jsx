@@ -3,9 +3,7 @@ import { Text, View, Image } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import globalStyle from '../style/global.js';
 import { AntDesign } from '@expo/vector-icons'; 
-import logo from '../icons/logo.png';
 import Parse from "parse/react-native.js";
-import MainApp from './MainApp';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -58,17 +56,17 @@ class LogIn extends Component {
                 <View style={{ width:"100%"}}>
                     <Image
                         source={require('../icons/logo.png')}
-                        style={globalStyle.logInLogo}
+                        style={{width: "100%", height: 70, marginBottom: 50}}
                         resizeMode="contain"
                     />
                     <Input
                         placeholder="Pseudo"
-                        leftIcon={<AntDesign name="user" size={24} color="black" style={globalStyle.logInIcons}/>}
+                        leftIcon={<AntDesign name="user" size={24} color="black" style={{paddingRight: 5}}/>}
                         onChangeText={value => this.setState({ userInput: value })}
                     />
                     <Input 
                         placeholder="Mot de passe" 
-                        leftIcon={<AntDesign name="lock1" size={24} color="black" style={globalStyle.logInIcons}/>}
+                        leftIcon={<AntDesign name="lock1" size={24} color="black" style={{paddingRight: 5}}/>}
                         secureTextEntry={true} 
                         onChangeText={value => this.setState({ passwordInput: value })}
                         errorMessage={this.state.errorLogin}

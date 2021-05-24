@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import Calendar from '../pages/Objectives';
+import Calendar from '../pages/Calendar';
 import Statistics from '../pages/Statistics';
 import Objectives from '../pages/Objectives';
 import Documentation from '../pages/Documentation';
@@ -18,7 +18,6 @@ class Navbar extends Component {
         const Tab = createBottomTabNavigator();
 
         return (
-            // <NavigationContainer>
                 <Tab.Navigator tabBarOptions={{activeTintColor: '#6a09b5', showLabel: false}}
                 screenOptions= {{tabBarLabel: ({ tintColor, focused, item }) => {
                     return focused
@@ -64,7 +63,6 @@ class Navbar extends Component {
                                 }}
                     />
                 </Tab.Navigator>
-            
         );
     }
 }
