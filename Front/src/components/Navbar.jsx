@@ -11,6 +11,7 @@ import 'react-native-gesture-handler';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 
+
 class Navbar extends Component {
 
   render() {
@@ -18,7 +19,7 @@ class Navbar extends Component {
 
     return (
         <NavigationContainer>
-            <Tab.Navigator tabBarOptions={{activeTintColor: '#212121', showLabel: false}}
+            <Tab.Navigator tabBarOptions={{activeTintColor: '#6a09b5', showLabel: false}}
             screenOptions= {{tabBarLabel: ({ tintColor, focused, item }) => {
 				return focused
 					? (<Text style={{ fontWeight: 'bold',}} ></Text>)
