@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { Header, Image } from 'react-native-elements';
-import Parse from "parse/react-native.js";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ThemeProvider } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import LogIn from '../pages/LogIn';
-import Profile from '../pages/Profile';
-import { NavigationContainer } from '@react-navigation/native';
+import { MaterialIcons } from '@expo/vector-icons'; 
+import FitImage from 'react-native-fit-image';
+import { Dimensions } from 'react-native';
 
 class Headerbar extends Component {
 
@@ -23,35 +20,33 @@ class Headerbar extends Component {
     }
 
     render() {
-        const Drawer = createDrawerNavigator();
+        const win = Dimensions.get('window');
         return (
-            <>
             <View>
                 <Header
-                    containerStyle={{ paddingBottom: 0}}
+                    containerStyle={{ paddingBottom: 0, paddingTop: 0 }}
                     backgroundColor="#a363d4"
 
                     leftComponent={
                         <Image source={require('../icons/girl.png')}  
-                            style={{width: 70, height: 70}}
+                            style={{width: 70, height: 40}}
                             resizeMode="center"/>
+
                     }
-                    
+                    leftContainerStyle={{ marginTop: 10}}
                     centerComponent={{
                         text: "Bienvenue " + this.state.user.firstName + " !",
                         style: {color:"white", fontSize: 20}
                     }}
                     centerContainerStyle={{ justifyContent: 'center'}}
                     
-                    rightComponent={{ icon: 'home', color: '#fff' }}
+                    rightComponent={
+                        <MaterialIcons name="settings" size={24} color="white" 
+                                       onPress={() => this.props.navigation.navigate('Profile')}/>
+                    }
+                    rightContainerStyle={{ justifyContent: 'center'}}
                 />
-
             </View>
-            {/* <Drawer.Navigator>
-                <Drawer.Screen name="LogIn2" component={LogIn} />
-                <Drawer.Screen name="Profile2" component={Profile} />
-            </Drawer.Navigator> */}
-        </>
         );
     }
 }

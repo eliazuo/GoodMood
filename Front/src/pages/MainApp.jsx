@@ -8,7 +8,7 @@ class MainApp extends Component {
   render() {
     return (
         <>
-            <Headerbar></Headerbar>
+            <Headerbar navigation={this.props.navigation}></Headerbar>
             <Navbar></Navbar>
         </>
     );
