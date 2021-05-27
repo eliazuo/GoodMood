@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import Calendar from '../pages/Calendar';
+import CalendarPage from '../pages/CalendarPage';
 import Statistics from '../pages/Statistics';
 import Objectives from '../pages/Objectives';
 import Documentation from '../pages/Documentation';
@@ -26,7 +26,7 @@ class Navbar extends Component {
                 }}}
                 >
 
-                    <Tab.Screen name="Calendar" component={Calendar} 
+                    <Tab.Screen name="CalendarPage" component={CalendarPage} 
                                 options={{
                                     tabBarIcon: ({ focused, color, size }) => (
                                         <Ionicons name="md-calendar-sharp" color={color} size={size}/>
