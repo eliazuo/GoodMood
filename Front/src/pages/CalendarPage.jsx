@@ -5,6 +5,7 @@ import { LocaleConfig } from 'react-native-calendars';
 import { Dimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Parse from "parse/react-native.js";
+import AddMood from './AddMood';
 
 class CalendarPage extends Component {
 
@@ -14,7 +15,8 @@ class CalendarPage extends Component {
             user: {},
             userMoodList: [],
             colorsByFeelings: {},
-            calendarMarkedDatesUserMood: {}
+            calendarMarkedDatesUserMood: {},
+            selectedDate: null
         };
 
         AsyncStorage.getItem('user').then((user) => {
@@ -124,20 +126,16 @@ class CalendarPage extends Component {
         return test;
     }
 
-
-
-
-    handleDayClick(day){
-        console.log(day);
-        //alert(day.dateString);
+    handleDayClick(date){
+        console.log(date);
+        this.setState({selectedDate: date.dateString});
     }
 
-
-
     render() {
-    
+        if (this.state.selectedDate != null){
+            return (<AddMood selectedDate={this.state.selectedDate}></AddMood>)
+        }
         const win = Dimensions.get('window');
-
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', width:"100%"}}>
                 <CalendarList
