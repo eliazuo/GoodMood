@@ -15,5 +15,10 @@ export default StyleSheet.create({
     logOutButton: {
         backgroundColor:  "#D72C0A",
         borderRadius: 25
+    },
+    labelStyle: {
+        color:  "#6a09b5",
+        fontWeight: "bold",
+        fontSize: 18,
     }
 });

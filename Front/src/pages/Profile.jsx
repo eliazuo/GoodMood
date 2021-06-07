@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, View, Image } from 'react-native';
+import { Alert, View, Image, Text } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import globalStyle from '../style/global.js';
 import Parse from "parse/react-native.js";
@@ -33,9 +33,13 @@ class Profile extends Component {
         queryUser.equalTo('objectId', this.state.user.objectId);
         const user = await queryUser.first();
 
-        user.set('firstName', this.state.user.firstName);
-        user.set('lastName', this.state.user.lastName);
-        user.set('birthDate', this.state.user.birthDate);
+        let birthDateArray = this.state.userBirthDate.split("-");
+        const birthDateString = birthDateArray[1] + "-" + birthDateArray[0] + "-" + birthDateArray[2] + ' 01:00:00';
+        const birthDate = new Date(birthDateString);
+
+        user.set('firstName', this.state.userFirstName);
+        user.set('lastName', this.state.userLastName);
+        user.set('birthDate', birthDate);
         await user.save();
         AsyncStorage.setItem('user', JSON.stringify(user));
     };
@@ -59,12 +63,10 @@ class Profile extends Component {
     render() {
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', margin: 35}}>
-                <View style={{ width:"35%", marginRight: 'auto', marginBottom: '10%'}}>  
-                    <Button
-                        title="< Retour"
-                        buttonStyle={globalStyle.goBackButton}
-                        onPress={() => this.props.navigation.navigate('MainApp')}
-                    />
+                <View style={{ width:"35%", marginRight: 'auto', marginBottom: '10%'}}>
+                    <Text title="< Retour" style={globalStyle.labelStyle} onPress={() => this.props.navigation.navigate('MainApp')}>
+                        {"< Retour"}
+                    </Text>
                 </View> 
                 <View style={{ width:"100%"}}>
                     <Image
@@ -74,16 +76,19 @@ class Profile extends Component {
                     />
                     <Input
                         label="Prénom"
+                        labelStyle={globalStyle.labelStyle}
                         defaultValue={this.state.userFirstName}
                         onChangeText={value => this.setState({ userFirstName: value })}
                     />
                     <Input
                         label="Nom"
+                        labelStyle={globalStyle.labelStyle}
                         defaultValue={this.state.userLastName}
                         onChangeText={value => this.setState({ userLastName: value })}
                     />
                     <Input
                         label="Anniversaire"
+                        labelStyle={globalStyle.labelStyle}
                         defaultValue={this.state.userBirthDate}
                         onChangeText={value => this.setState({ userBirthDate: value })}
                     />
