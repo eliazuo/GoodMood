@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View, Image } from 'react-native';
+import { Alert, View, Image } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import globalStyle from '../style/global.js';
 import Parse from "parse/react-native.js";
+import DatePicker from 'react-native-datepicker';
+import Moment from 'moment';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -14,33 +16,56 @@ class Profile extends Component {
             user: {},
             userFirstName: "",
             userLastName: "",
-            userAge:"",
+            userBirthDate: "",
         };
-
+        this.updateData = this.updateData.bind(this);
+        this.logOut = this.logOut.bind(this);
         AsyncStorage.getItem('user').then((user) => {
-          this.setState({user: JSON.parse(user)}, this.retrieveProfile);
+            this.setState({ user: JSON.parse(user) });
+            this.setState({ userFirstName: this.state.user.firstName });
+            this.setState({ userLastName: this.state.user.lastName });
+            this.setState({ userBirthDate: Moment(this.state.user.birthDate.iso).format('DD-MM-YYYY') });
         })
-
-        this.retrieveProfile = this.retrieveProfile.bind(this);
     }
 
-    retrieveProfile(){
-        this.getUserProfile().then(user => this.setState({user: user}));
-        this.setState({ userFirstName: this.state.user.firstName });
-        this.setState({ userLastName: this.state.user.lastName });
-        //this.setState({ userAge: this.state.user.age });
-    }
-
-    async getUserProfile() {
+    async updateData() {
         const queryUser = new Parse.Query('_User');
         queryUser.equalTo('objectId', this.state.user.objectId);
         const user = await queryUser.first();
-        return user;
+
+        user.set('firstName', this.state.user.firstName);
+        user.set('lastName', this.state.user.lastName);
+        user.set('birthDate', this.state.user.birthDate);
+        await user.save();
+        AsyncStorage.setItem('user', JSON.stringify(user));
+    };
+
+    async logOut() {
+        await Parse.User.logOut()
+        .then(async () => {
+            const currentUser = await Parse.User.currentAsync();
+            if (currentUser === null) {
+            Alert.alert('Déconnexion', 'Tu as été déconnecté !');
+            }
+            this.props.navigation.navigate('LogIn');
+            return true;
+        })
+        .catch((error) => {
+            Alert.alert('Error!', error.message);
+            return false;
+        });
     }
 
     render() {
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', margin: 35}}>
+                <View style={{ width:"35%", marginRight: 'auto', marginBottom: '10%'}}>  
+                    <Button
+                        title="< Retour"
+                        buttonStyle={globalStyle.goBackButton}
+                        onPress={() => this.props.navigation.navigate('MainApp')}
+                    />
+                </View> 
                 <View style={{ width:"100%"}}>
                     <Image
                         source={require('../icons/girl.png')}
@@ -58,21 +83,41 @@ class Profile extends Component {
                         onChangeText={value => this.setState({ userLastName: value })}
                     />
                     <Input
-                        label="Âge"
-                        defaultValue={this.state.userAge}
-                        secureTextEntry={true}
+                        label="Anniversaire"
+                        defaultValue={this.state.userBirthDate}
+                        onChangeText={value => this.setState({ userBirthDate: value })}
+                    />
+                    <DatePicker
+                        style={{width: 200}}
+                        date={this.state.userBirthDate}
+                        mode="date"
+                        format="DD-MM-YYYY"
+                        maxDate="01/01/2011"
+                        confirmBtnText="Valider"
+                        cancelBtnText="Annuler"
+                        customStyles={{
+                            dateIcon: {
+                                position: 'absolute',
+                                left: 0,
+                                top: 4,
+                                marginLeft: 0
+                            },
+                            dateInput: {
+                                marginLeft: 36
+                            }
+                        }}
+                        onDateChange={(date) => {this.setState({userBirthDate: date})}}
                     />
                     <Button title="Sauvegarder"
                         containerStyle={globalStyle.buttonContainer}
                         buttonStyle={globalStyle.button}
-                        onPress={this.tryToLogIn}/>
+                        onPress={this.updateData}/>
                 </View>
-                <View style={{ width:"50%", marginRight: 'auto'}}>  
+                <View style={{ width:"50%", margin: 'auto'}}>  
                     <Button
-                        title="Retour"
-                        containerStyle={globalStyle.buttonContainer}
-                        buttonStyle={globalStyle.button}
-                        onPress={() => this.props.navigation.navigate('MainApp')}
+                        title="Déconnexion"
+                        buttonStyle={globalStyle.logOutButton}
+                        onPress={this.logOut}
                     />
                 </View> 
             </View>
