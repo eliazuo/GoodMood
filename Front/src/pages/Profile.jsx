@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Alert, View, Image, Text } from 'react-native';
-import { Input, Button } from 'react-native-elements';
+import { Header, Input, Button } from 'react-native-elements';
 import globalStyle from '../style/global.js';
 import Parse from "parse/react-native.js";
 import DatePicker from 'react-native-datepicker';
@@ -35,12 +35,13 @@ class Profile extends Component {
 
         let birthDateArray = this.state.userBirthDate.split("-");
         const birthDateString = birthDateArray[1] + "-" + birthDateArray[0] + "-" + birthDateArray[2] + ' 01:00:00';
-        const birthDate = new Date(birthDateString);
 
         user.set('firstName', this.state.userFirstName);
         user.set('lastName', this.state.userLastName);
-        user.set('birthDate', birthDate);
-        await user.save();
+        user.set('birthDate', new Date(birthDateString));
+        await user.save().then(
+            Alert.alert('Mis à jour', 'Ton profil a été mis à jour !')
+        )
         AsyncStorage.setItem('user', JSON.stringify(user));
     };
 
@@ -49,7 +50,7 @@ class Profile extends Component {
         .then(async () => {
             const currentUser = await Parse.User.currentAsync();
             if (currentUser === null) {
-            Alert.alert('Déconnexion', 'Tu as été déconnecté !');
+                Alert.alert('Déconnexion', 'Tu as été déconnecté !');
             }
             this.props.navigation.navigate('LogIn');
             return true;
@@ -62,13 +63,28 @@ class Profile extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', margin: 35}}>
-                <View style={{ width:"35%", marginRight: 'auto', marginBottom: '10%'}}>
-                    <Text title="< Retour" style={globalStyle.labelStyle} onPress={() => this.props.navigation.navigate('MainApp')}>
-                        {"< Retour"}
-                    </Text>
-                </View> 
-                <View style={{ width:"100%"}}>
+            <View style={{ flex: 1 }}>
+                <View style={{ flex: 1 }}>
+                    <Header containerStyle={{ paddingBottom: 0, paddingTop: 0 }} backgroundColor="#a363d4"
+                        leftComponent={
+                            <View>
+                                <Button 
+                                    title="Retour"
+                                    buttonStyle={{ backgroundColor:  "white", borderRadius: 25, margin: 30, margin: 'auto' }}
+                                    titleStyle={{ color:  "#6a09b5", fontSize: 14, fontWeight: "bold" }}
+                                    onPress={() => this.props.navigation.navigate('MainApp')}
+                                />
+                            </View>
+                        }
+                        leftContainerStyle={{ width:"35%", height: 40 }}
+                        centerComponent={{
+                            text: "Profil personnel",
+                            style: {color:"white", fontSize: 20}
+                        }}
+                        centerContainerStyle={{ justifyContent: 'center'}}
+                    />
+                </View>
+                <View style={{ flex: 3, alignItems: 'center', justifyContent: 'center', margin: 35 }}>
                     <Image
                         source={require('../icons/girl.png')}
                         style={{width: "100%", height: 70, marginBottom: 50}}
@@ -97,6 +113,7 @@ class Profile extends Component {
                         date={this.state.userBirthDate}
                         mode="date"
                         format="DD-MM-YYYY"
+                        minDate="01/01/1921"
                         maxDate="01/01/2011"
                         confirmBtnText="Valider"
                         cancelBtnText="Annuler"
@@ -118,7 +135,7 @@ class Profile extends Component {
                         buttonStyle={globalStyle.button}
                         onPress={this.updateData}/>
                 </View>
-                <View style={{ width:"50%", margin: 'auto'}}>  
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', margin: 35 }}>  
                     <Button
                         title="Déconnexion"
                         buttonStyle={globalStyle.logOutButton}
