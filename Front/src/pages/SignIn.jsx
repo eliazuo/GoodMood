@@ -76,6 +76,10 @@ class SignIn extends Component {
             isValid = false;
             this.setState({ errorPassword:"Veuillez saisir un mot de passe valide" });
           }
+          else if ( userPassword.length < 8){
+            isValid = false;
+            this.setState({ errorPassword:"Le mot de passe doit contenir au moins 8 caractères" });
+          }
          else if (userPassword !== confirmuserPassword){
             isValid = false;
             this.setState({ errorComfirmPassword:"Veuillez saisir le même mot de passe" });
