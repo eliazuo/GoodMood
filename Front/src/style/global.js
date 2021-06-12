@@ -110,5 +110,17 @@ export default StyleSheet.create({
         fontSize: 17,
         color: "#6a09b5",
         fontWeight: "bold"
+    },
+    objectivesContainer: {
+        margin: "auto",
+        marginRight:20,
+        width: 80,
+        marginBottom: 15
+    },
+    objectivesIcon: {
+        width: 60,
+        height: 70,
+        resizeMode: 'contain',
+        alignSelf: 'center'
     }
 });
