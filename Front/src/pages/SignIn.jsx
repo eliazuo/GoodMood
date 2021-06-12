@@ -3,6 +3,7 @@ import { View, Image, Text } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import globalStyle from '../style/global.js';
 import Parse from "parse/react-native.js";
+import Moment from 'moment';
 
 
 class SignIn extends Component {
@@ -16,19 +17,21 @@ class SignIn extends Component {
             userPassword: "",
             userEmail: "",
             comfirmUserPassword: "",
+
             errorSignIn: "",
             errorUserName: "",
             errorLastName: "", 
             errorFirstName: "",
+            errorBirthdate:"",
             errorPassword: "",
             errorComfirmPassword: "",
-            errorEmail: ""
+            errorEmail: "",
+            userBirthDate: Moment(new Date(new Date().setHours(0,0,0,0))).format('DD-MM-YYYY')
         };
 
         this.tryToSignIn = this.tryToSignIn.bind(this);
+        
     };
-
-    
 
     async tryToSignIn() {
         const user = new Parse.User();
@@ -38,11 +41,15 @@ class SignIn extends Component {
         user.set('lastName', this.state.userLastName);
         user.set('email', this.state.userEmail); 
 
+        let birthDateArray = this.state.userBirthDate.split("-");
+        const birthDateString = birthDateArray[1] + "-" + birthDateArray[0] + "-" + birthDateArray[2] + ' 01:00:00';
+        const birthDate = new Date(birthDateString);
+        user.set('birthDate', birthDate);
+
         const todaysDate = new Date(new Date().setHours(0,0,0,0));
         user.set('createdAt', todaysDate); 
         user.set('updatedAt', todaysDate); 
         user.set('helpState', 0); 
-
 
         //verification des champs saisis
         var isValid = true;
@@ -93,7 +100,8 @@ class SignIn extends Component {
                   }
             }
   };
-  
+
+    
 
     render() {
         return (
@@ -140,6 +148,7 @@ class SignIn extends Component {
                         secureTextEntry={true} 
                         onChangeText={value => this.setState({ confirmuserPassword: value , errorComfirmPassword:"" })}
                         errorMessage={this.state.errorComfirmPassword}
+                        
                     />
                     <Input
                         label="Adresse E-Mail :"
@@ -153,16 +162,15 @@ class SignIn extends Component {
                             buttonStyle={globalStyle.button}
                             onPress={this.tryToSignIn}/>
                     </View>   
-       
                 <View style={{ width:"80%", position: "absolute", bottom: 0, flexDirection: 'row', justifyContent: 'space-between' }}>  
                     <Text onPress={() => this.props.navigation.navigate('LogIn')}>CNX</Text>
                     <Text onPress={() => this.props.navigation.navigate('CGU')}>CGU</Text>
                     <Text onPress={() => this.props.navigation.navigate('ContactUs')}>CONTACT</Text>
                 </View> 
-            
             </View>
         );
     }
 }
 
 export default SignIn;
+
