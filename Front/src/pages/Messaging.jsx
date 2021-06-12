@@ -54,8 +54,6 @@ class Messaging extends Component {
         const parseQuery = new Parse.Query('Messaging');
         let allMessages = await parseQuery.find();
         allMessages.map( message => {
-            console.log(message.attributes);
-            console.log(message.attributes.id_sender);
             if ((message.attributes.id_sender == this.state.user.objectId && message.attributes.id_recipient == this.state.recipientUser.objectId)
             || (message.attributes.id_sender == this.state.recipientUser.objectId && message.attributes.id_recipient == this.state.user.objectId)) {
             this.state.messages.push(message)
