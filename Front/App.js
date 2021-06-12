@@ -21,7 +21,9 @@ Parse.serverURL = 'https://parseapi.back4app.com/';
 
 export default function App() {
 
+
     const Stack = createStackNavigator();
+
     return (
         <SafeAreaProvider>
             <NavigationContainer>

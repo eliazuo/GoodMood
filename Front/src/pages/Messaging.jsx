@@ -12,11 +12,12 @@ class Messaging extends Component {
         super(props);
         this.state = {
             user:"",
-            recipientUser: {
-                objectId: "b1SHQpgeUS",
-                firstName: "Sebastien",
-                lastName: "Quill",
-            },
+            // recipientUser: {
+            //     objectId: "b1SHQpgeUS",
+            //     firstName: "Sebastien",
+            //     lastName: "Quill",
+            // },
+            recipientUser: this.props.route.params.contact,
             messages: [],
             newMessage: "",
         };
@@ -36,7 +37,7 @@ class Messaging extends Component {
         let Message = new Parse.Object('Messaging');
         Message.set('message', this.state.newMessage);
         Message.set('id_sender', this.state.user.objectId);
-        Message.set('id_recipient', this.state.recipientUser.objectId);
+        Message.set('id_recipient', this.state.recipientUser.id);
         try {
           await Message.save();
           // Refresh messages list to show the new one
@@ -54,8 +55,8 @@ class Messaging extends Component {
         const parseQuery = new Parse.Query('Messaging');
         let allMessages = await parseQuery.find();
         allMessages.map( message => {
-            if ((message.attributes.id_sender == this.state.user.objectId && message.attributes.id_recipient == this.state.recipientUser.objectId)
-            || (message.attributes.id_sender == this.state.recipientUser.objectId && message.attributes.id_recipient == this.state.user.objectId)) {
+            if ((message.attributes.id_sender == this.state.user.objectId && message.attributes.id_recipient == this.state.recipientUser.id)
+            || (message.attributes.id_sender == this.state.recipientUser.id && message.attributes.id_recipient == this.state.user.objectId)) {
             this.state.messages.push(message)
             }
         })
@@ -105,7 +106,7 @@ class Messaging extends Component {
 
                 <View style={{justifyContent: "flex-start", alignItems: "center", backgroundColor: "#dedede", padding: 15, margin: 10, borderRadius: 15}}>
                     <Text style={{color: "#6a09b5", fontSize: 16}}>
-                        {this.state.recipientUser.firstName} {this.state.recipientUser.lastName}
+                        {this.state.recipientUser.get("firstName")} {this.state.recipientUser.get("lastName")}
                     </Text>
                 </View>
                 <View style={{flex: 1, justifyContent: "center", alignItems: "stretch"}}>

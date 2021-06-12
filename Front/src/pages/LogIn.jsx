@@ -73,7 +73,7 @@ class LogIn extends Component {
                         
                     />
                     <Button title="Connexion"
-                            containerStyle={globalStyle.buttonContainer}
+                            //containerStyle={globalStyle.buttonContainer}
                             buttonStyle={globalStyle.button}
                             onPress={this.tryToLogIn}/>
 

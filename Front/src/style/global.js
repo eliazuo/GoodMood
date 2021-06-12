@@ -78,5 +78,39 @@ export default StyleSheet.create({
         alignSelf: 'flex-start',
         borderRadius: 20,
         //d62dca0a570274438be947fb94f40d452cd0e8f3
+    },
+    button2: {
+        backgroundColor:  "#009687",
+        borderRadius: 25,
+        paddingLeft: 15,
+        paddingRight: 15
+    },
+    buttonTab: {
+        backgroundColor:  "#ffffff",
+        borderRadius: 25,
+        borderWidth: "1px",
+        borderColor: "#6a09b5",
+        borderCollapse: "separate",
+        paddingTop: 0,
+        paddingBottom: 0
+    },
+    buttonTabActive: {
+        backgroundColor:  "#6a09b5",
+        borderRadius: 25,
+        borderWidth: "1px",
+        borderColor: "#6a09b5",
+        borderCollapse: "separate",
+        paddingTop: 0,
+        paddingBottom: 0
+    },
+    title1: {
+        fontSize: "1.4rem",
+        color: "#6a09b5",
+        fontWeight: "bold"
+    },
+    title2: {
+        fontSize: "1.1rem",
+        color: "#6a09b5",
+        fontWeight: "bold"
     }
 });
