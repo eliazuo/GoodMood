@@ -114,7 +114,7 @@ class CalendarPage extends Component {
         var test = {
             container: {
                 backgroundColor: color,
-                borderRadius: "10px"
+                borderRadius: 10
             },
             text: {
                 color: 'white',

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Switch, ActivityIndicator } from 'react-native';
+import { Text, View, Switch, ActivityIndicator, ScrollView, TouchableHighlight } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Parse from "parse/react-native.js";
 import globalStyle from '../style/global.js';
@@ -16,6 +16,7 @@ class ContactList extends Component {
         };
 
         this.getContacts = this.getContacts.bind(this);
+        this.goToMessagingPage = this.goToMessagingPage.bind(this);
 
         var that = this;
         AsyncStorage.getItem('user').then((user) => {
@@ -54,24 +55,33 @@ class ContactList extends Component {
         this.setState({isLoadingList: false});
     }
 
+    goToMessagingPage(contact){
+        this.props.navigation.navigate(
+            'Messaging',{
+                contact: contact
+            }
+        );
+    }
 
     render() {
         return (
-            <View>
+            <ScrollView>
                 <View>
                     {this.state.contacts.map(contact =>
                         <View key={contact.get('objectId')} >
-                            <ContactCard 
-                                        contact={contact}
-                                        user={this.state.user}
-                                        navigation={this.props.navigation}/>
+                            <TouchableHighlight onPress={() => this.goToMessagingPage(contact)}>
+                                <ContactCard 
+                                            contact={contact}
+                                            user={this.state.user}
+                                            navigation={this.props.navigation}/>
+                            </TouchableHighlight>
                         </View>
                     )}
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', margin: 35 }}>
                     <ActivityIndicator size="large" color="#6a09b5" animating={this.state.isLoadingList}/>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }

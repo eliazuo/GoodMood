@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Switch, ActivityIndicator } from 'react-native';
+import { Text, View, Switch, ActivityIndicator, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Parse from "parse/react-native.js";
 import globalStyle from '../style/global.js';
@@ -106,8 +106,8 @@ class ContactStudentList extends Component {
 
         return (
 
-            <View>
-                <View style={{ marginTop: "10px", flexDirection: 'row', marginTop: 5, marginBottom: 15 }}>
+            <ScrollView>
+                <View style={{ marginTop: 10, flexDirection: 'row', marginTop: 5, marginBottom: 15 }}>
                     <View style={{ flexDirection: 'column', justifyContent: "space-between" }}>
                         <Text style={{ fontSize: 16 }}>Je souhaite aider</Text>
                         <Text style={{ fontSize: 16 }}>Je souhaite être aidé</Text>
@@ -116,12 +116,12 @@ class ContactStudentList extends Component {
                         <Switch
                             onValueChange={this.toggleHelperSwitch}
                             value={this.state.helperSwitchState}
-                            style={{ marginLeft: "15px"}}
+                            style={{ marginLeft: 15}}
                         />
                         <Switch
                             onValueChange={this.toggleHelpedSwitch}
                             value={this.state.helpedSwitchState}
-                            style={{ marginLeft: "15px", marginTop:'10px'}}
+                            style={{ marginLeft: 15, marginTop:10}}
                         />
                     </View>
                 </View>  
@@ -160,7 +160,7 @@ class ContactStudentList extends Component {
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', margin: 35 }}>
                     <ActivityIndicator size="large" color="#6a09b5" animating={this.state.isLoadingList}/>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }

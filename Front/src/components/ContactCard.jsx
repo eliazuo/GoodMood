@@ -13,24 +13,15 @@ class ContactCard extends Component {
         super(props);
         this.state = { 
             user: this.props.user,
-            contact: this.props.contact,
-            //sender: null
-            //isRequestAlreadySent: null
+            contact: this.props.contact
         };
-
-        this.goToMessagingPage = this.goToMessagingPage.bind(this);
     }
 
-    goToMessagingPage(){
-        this.props.navigation.navigate(
-            'Messaging',{
-                contact: this.state.contact
-            });
-    }
 
     render() {
         return (
-            <Card onPress={this.goToMessagingPage}>
+            
+            <Card>
                 {/* <Card.Image source={require('../icons/girl.png')}></Card.Image> */}
                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                     <Card.Title style={{textAlign:"center", width:"100%"}}>
@@ -40,7 +31,6 @@ class ContactCard extends Component {
                 </View>
                 <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
                     incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</Text>
-                
             </Card>   
         );
     }

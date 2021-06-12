@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Switch, ActivityIndicator } from 'react-native';
+import { Text, View, Switch, ActivityIndicator, ScrollView } from 'react-native';
 import Parse from "parse/react-native.js";
 import ContactRequestCard from "../components/ContactRequestCard";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -43,7 +43,7 @@ class ContactReceivedRequests extends Component {
     render() {
 
         return (
-            <View>
+            <ScrollView>
                 <View>
                     {this.state.requests.map(request =>
                         <View key={request.get('objectId')} >
@@ -56,7 +56,7 @@ class ContactReceivedRequests extends Component {
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', margin: 35 }}>
                     <ActivityIndicator size="large" color="#6a09b5" animating={this.state.isLoadingList}/>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }
