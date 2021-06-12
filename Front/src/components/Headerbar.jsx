@@ -29,7 +29,6 @@ class Headerbar extends Component {
 
                     leftComponent={
                         <Image source={require('../icons/girl.png')}  
-                            placeholderStyle={{ backgroundColor: 'transparent' }}
                             style={{width: 70, height: 40}}
                             resizeMode="center"/>
 

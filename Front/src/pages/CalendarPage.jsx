@@ -53,8 +53,6 @@ class CalendarPage extends Component {
         });
     }
 
-
-
     async getUserMoodList() {
 
         const queryUser = new Parse.Query('_User');

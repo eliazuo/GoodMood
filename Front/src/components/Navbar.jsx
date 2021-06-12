@@ -4,7 +4,7 @@ import CalendarPage from '../pages/CalendarPage';
 import Statistics from '../pages/Statistics';
 import Objectives from '../pages/Objectives';
 import Documentation from '../pages/Documentation';
-import Chatting from '../pages/Chatting';
+import Contact from '../pages/Contact';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Foundation } from '@expo/vector-icons'; 
 import 'react-native-gesture-handler';
@@ -19,11 +19,11 @@ class Navbar extends Component {
 
         return (
                 <Tab.Navigator tabBarOptions={{activeTintColor: '#6a09b5', showLabel: false}}
-                screenOptions= {{tabBarLabel: ({ tintColor, focused, item }) => {
-                    return focused
-                        ? (<Text style={{ fontWeight: 'bold',}} ></Text>)
-                        : (<Text style={{ fontWeight: 'normal', fontSize: 15 }} ></Text>)
-                }}}
+                                screenOptions= {{tabBarLabel: ({ tintColor, focused, item }) => {
+                                    return focused
+                                        ? (<Text style={{ fontWeight: 'bold',}} ></Text>)
+                                        : (<Text style={{ fontWeight: 'normal', fontSize: 15 }} ></Text>)
+                                }}}
                 >
 
                     <Tab.Screen name="CalendarPage" component={CalendarPage} 
@@ -55,7 +55,7 @@ class Navbar extends Component {
                                     ),
                                 }}
                     />
-                    <Tab.Screen name="Chatting" component={Chatting} 
+                    <Tab.Screen name="Contact" component={Contact} 
                                 options={{
                                     tabBarIcon: ({ focused, color, size }) => (
                                         <Ionicons name="chatbubbles-outline" color={color} size={size}/>
