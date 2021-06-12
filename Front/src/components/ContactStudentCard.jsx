@@ -107,7 +107,7 @@ class ContactStudentCard extends Component {
                 <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
                     incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</Text>
                 <Button title={this.getButtonTitleToDisplay()}
-                        titleStyle={{fontSize: "0.9rem"}}
+                        titleStyle={{fontSize: 14}}
                         containerStyle={{marginTop: 10, marginLeft: "auto", marginRight: "auto"}}
                         buttonStyle={globalStyle.button2}
                         onPress={this.sendContactRequest}

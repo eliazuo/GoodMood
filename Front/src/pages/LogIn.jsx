@@ -51,6 +51,12 @@ class LogIn extends Component {
     }
 
     render() {
+        AsyncStorage.getItem('user').then((user) => {
+            if (user != ""){
+                this.props.navigation.navigate('MainApp');
+            }
+        })
+        
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', margin: 35 }}>
                 <View style={{ width:"100%"}}>

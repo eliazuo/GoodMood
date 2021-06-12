@@ -3,7 +3,7 @@ import { Alert, View, Image, Text } from 'react-native';
 import { Header, Input, Button } from 'react-native-elements';
 import globalStyle from '../style/global.js';
 import Parse from "parse/react-native.js";
-import DatePicker from 'react-native-datepicker';
+//import DatePicker from 'react-native-datepicker';
 import Moment from 'moment';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -50,7 +50,9 @@ class Profile extends Component {
         .then(async () => {
             const currentUser = await Parse.User.currentAsync();
             if (currentUser === null) {
-                Alert.alert('Déconnexion', 'Tu as été déconnecté !');
+                AsyncStorage.setItem('user', "").then(() => {
+                    Alert.alert('Déconnexion', 'Tu as été déconnecté !');
+                })
             }
             this.props.navigation.navigate('LogIn');
             return true;
@@ -110,7 +112,7 @@ class Profile extends Component {
                     />
 
                     
-                    <DatePicker
+                    {/* <DatePicker
                     
                         style={{width: 200}}
                         date={this.state.userBirthDate}
@@ -132,7 +134,7 @@ class Profile extends Component {
                             }
                         }}
                         onDateChange={(date) => {this.setState({userBirthDate: date})}}
-                     />
+                     /> */}
                       
                     
                     <Button title="Sauvegarder"

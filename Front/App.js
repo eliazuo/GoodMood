@@ -23,11 +23,10 @@ export default function App() {
 
 
     const Stack = createStackNavigator();
-
     return (
-        <SafeAreaProvider>
+            <SafeAreaProvider>
             <NavigationContainer>
-                <Stack.Navigator initialRouteName="LogIn" screenOptions={{headerShown: false}}>
+                <Stack.Navigator initialRouteName={"LogIn"} screenOptions={{headerShown: false}}>
                     <Stack.Screen name="LogIn" component={LogIn}/>
                     <Stack.Screen name="SignIn" component={SignIn}/>
                     <Stack.Screen name="CGU" component={CGU}/>
@@ -38,5 +37,6 @@ export default function App() {
                 </Stack.Navigator>
             </NavigationContainer>
         </SafeAreaProvider>
+
     );
 }

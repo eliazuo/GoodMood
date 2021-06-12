@@ -109,8 +109,8 @@ class ContactStudentList extends Component {
             <View>
                 <View style={{ marginTop: "10px", flexDirection: 'row', marginTop: 5, marginBottom: 15 }}>
                     <View style={{ flexDirection: 'column', justifyContent: "space-between" }}>
-                        <Text style={{ fontSize: "1rem" }}>Je souhaite aider</Text>
-                        <Text style={{ fontSize: "1rem" }}>Je souhaite être aidé</Text>
+                        <Text style={{ fontSize: 16 }}>Je souhaite aider</Text>
+                        <Text style={{ fontSize: 16 }}>Je souhaite être aidé</Text>
                     </View>
                     <View style={{ flexDirection: 'column', justifyContent: "space-between" }}>
                         <Switch

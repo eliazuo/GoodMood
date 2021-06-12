@@ -12,11 +12,6 @@ class Messaging extends Component {
         super(props);
         this.state = {
             user:"",
-            // recipientUser: {
-            //     objectId: "b1SHQpgeUS",
-            //     firstName: "Sebastien",
-            //     lastName: "Quill",
-            // },
             recipientUser: this.props.route.params.contact,
             messages: [],
             newMessage: "",
