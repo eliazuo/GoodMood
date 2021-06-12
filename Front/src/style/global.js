@@ -26,7 +26,6 @@ export default StyleSheet.create({
         padding: 5,
         color:  "#1EC64F",
         fontWeight: "bold",
-        //HEAD,
         fontSize: 17,
     },
     inputPlaceholder: {
@@ -77,7 +76,6 @@ export default StyleSheet.create({
         maxWidth: '50%',
         alignSelf: 'flex-start',
         borderRadius: 20,
-        //d62dca0a570274438be947fb94f40d452cd0e8f3
     },
     button2: {
         backgroundColor:  "#009687",
