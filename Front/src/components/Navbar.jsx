@@ -29,7 +29,7 @@ class Navbar extends Component {
                     <Tab.Screen name="CalendarPage" component={CalendarPage} 
                                 options={{
                                     tabBarIcon: ({ focused, color, size }) => (
-                                        <Ionicons name="md-calendar-sharp" color={color} size={size}/>
+                                        <Ionicons name="md-CalendarPage-sharp" color={color} size={size}/>
                                     ),
                                 }}
                     />

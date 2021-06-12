@@ -4,7 +4,6 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-
 import LogIn from './src/pages/LogIn';
 import MainApp from './src/pages/MainApp';
 import SignIn from './src/pages/SignIn';
@@ -16,7 +15,7 @@ import Profile from './src/pages/Profile';
 import Parse from "parse/react-native.js";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 Parse.setAsyncStorage(AsyncStorage);
-Parse.initialize('6i1YbghL132B74InN4uiHp7BknMfMSTw7bj0kOEN','G1MlImY3f8yf8TCZUvZhI2AVdBBDOvhuj2g66gGH');
+Parse.initialize('RoRhb1PpZrY1KJPbzQoN1YUWFdnrlg73LVmgCrky','txUH94PNNTccgACKD3O4yoqNIb5jQzz0KNhRfJLS');
 Parse.serverURL = 'https://parseapi.back4app.com/';
 
 export default function App() {

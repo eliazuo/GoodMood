@@ -1,155 +1,240 @@
 import React, { Component } from 'react';
-import { Text, View, Image } from 'react-native';
+import { Alert, View, Image, Text } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import globalStyle from '../style/global.js';
 import { AntDesign } from '@expo/vector-icons'; 
 import Parse from "parse/react-native.js";
-
+import Moment from 'moment';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
+/*
+  "objectId": "4BwpMWdCnm",
+  "username": "A string",
+  "email": "A string",
+  "firstName": "A string",
+  "lastName": "A string",
+  "birthDate": "2018-11-12T13:13:45.958Z",
+  "helpState": 1,
+  "attributes": { "foo": "bar" },
+  "password": "#Password123",
+  "createdAt": "2018-11-06T00:52:01.520Z",
+  "updatedAt": "2018-11-06T00:52:04.713Z"
+
+
+*/
 class SignIn extends Component {
 
     constructor(props) {
         super(props);
         this.state = { 
-            pseudoInput: "",
-            nameInput: "",
-            firstNameInput: "",
-            passwordInput: "",
-            comfirPasswordInput: "",
-            emailInput: "",
+           // user: {},
+            userUserName: "",
+            userLastName: "",
+            userFirstName: "",
+            userBirthDate:"",
+            userPassword: "",
+            userEmail: "",
+            comfirmUserPassword: "",
+
             errorSignIn: "",
-            errorPseudo: "",
-            errorName: "",
+            errorUserName: "",
+            errorLastName: "", 
             errorFirstName: "",
+            errorBirthdate:"",
             errorPassword: "",
             errorComfirmPassword: "",
-            errorEmail: ""
+            errorEmail: "",
+            userBirthDate: Moment(new Date(new Date().setHours(0,0,0,0))).format('DD-MM-YYYY')
+           
         };
+
         this.tryToSignIn = this.tryToSignIn.bind(this);
-        /*
-        this.successfullSignInCallback = this.successfullSignInCallback.bind(this);
-        this.unsuccessfullSignInCallback = this.unsuccessfullSignInCallback.bind(this);
-        */
-    }
-
-    tryToSignIn(){
-        this.setState({ errorSignIn: "" });
-
-        var pseudoInput = this.state.pseudoInput;
-        var nameInput = this.state.nameInput;
-        var firstNameInput = this.state.firstNameInput;
-        var passwordInput = this.state.passwordInput;
-        var confirmPasswordInput = this.state.passwordInput;
-        var emailInput = this.state.emailInput;
-        var that = this;
-
-        if (pseudoInput === ""){
-          this.setState({ errorPseudo:"Veuillez saisir un pseudo valide" });
-        }
-        if (nameInput === ""){
-          this.setState({ errorName:"Veuillez saisir un nom valide" });
-        }
-        if (firstNameInput === ""){
-          this.setState({ errorFirstName:"Veuillez saisir un prénom valide" });
-        }
-        if (passwordInput === ""){
-          this.setState({ errorPassword:"Veuillez saisir un mot de passe valide" });
-        }
-        else if (this.state.passwordInput !== this.state.confirmPasswordInput){
-          this.setState({ errorComfirmPassword:"Veuillez saisir le même mot de passe" });
-        }
-        var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-        if (!pattern.test(emailInput)) {
-          this.setState({ errorEmail:"Veuillez saisir une adresse mail valide" });
-        }
+        this.logOut = this.logOut.bind(this);
+        
     };
 
-    /*
-    successfullSignInCallback(user){
-        var that = this;
-        AsyncStorage.setItem('user', JSON.stringify(user)).then(() => {
-            that.props.navigation.navigate('MainApp');
-        })
-    }
+    
 
-    unsuccessfullSignInCallback(){
-        this.setState({ errorSignIn: "Compte ou mot de passe incorrect" });
-    }
-*/
+    async tryToSignIn() {
+        const user = new Parse.User();
+       // user.set('userId', null); 
+        user.set('username', this.state.userUserName);
+        user.set('password', this.state.userPassword);
+        user.set('firstName', this.state.userFirstName);
+        user.set('lastName', this.state.userLastName);
+        user.set('email', this.state.userEmail); 
+
+        let birthDateArray = this.state.userBirthDate.split("-");
+        const birthDateString = birthDateArray[1] + "-" + birthDateArray[0] + "-" + birthDateArray[2] + ' 01:00:00';
+        const birthDate = new Date(birthDateString);
+        user.set('birthDate', birthDate);
+
+        const todaysDate = new Date(new Date().setHours(0,0,0,0));
+        user.set('createdAt', todaysDate); 
+        user.set('updatedAt', todaysDate); 
+        user.set('helpState', 0); 
+
+
+        //verification des champs saisis
+        var isValid = true;
+        var userUserName = this.state.userUserName;
+        var userLastName = this.state.userLastName;
+        var userFirstName = this.state.userFirstName;
+        var userPassword = this.state.userPassword;
+        var confirmuserPassword = this.state.confirmuserPassword;
+        var userEmail = this.state.userEmail;
+
+        if (userUserName === ""){
+            isValid = false;
+            this.setState({ errorUserName:"Veuillez saisir un pseudo valide" });
+        }
+        if (userLastName === ""){
+            isValid = false;
+            this.setState({ errorLastName:"Veuillez saisir un nom valide" });
+          }
+          if (userFirstName === ""){
+            isValid = false;
+            this.setState({ errorFirstName:"Veuillez saisir un prénom valide" });
+          }
+          if (userPassword === ""){
+            isValid = false;
+            this.setState({ errorPassword:"Veuillez saisir un mot de passe valide" });
+          }
+         else if (userPassword !== confirmuserPassword){
+            isValid = false;
+            this.setState({ errorComfirmPassword:"Veuillez saisir le même mot de passe" });
+          } 
+          var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+          if (!pattern.test(userEmail)) {
+            isValid = false;
+            this.setState({ errorEmail:"Veuillez saisir une adresse mail valide" }); 
+          }
+
+            if( isValid)
+            {
+                //alert('to create New object: ' + JSON.stringify(user));
+                try {
+                    let userResult = await user.save();
+                    console.log('User created', userResult);
+                   // alert('User created: ' + JSON.stringify(userResult));
+                   alert('User created  succefully: ' + JSON.stringify(this.state.userUserName));
+                  } catch (error) {
+                    console.error('Error while creating user',this.state.userUserName+':'+ error);
+                    alert('Failed to create, with error code: ' + error);
+                  }
+            }
+  };
+  
+  async logOut() {
+    await Parse.User.logOut()
+    .then(async () => {
+        const currentUser = await Parse.User.currentAsync();
+        if (currentUser === null) {
+        Alert.alert('Déconnexion', 'Tu as été déconnecté !');
+        }
+        this.props.navigation.navigate('LogIn');
+        return true;
+    })
+    .catch((error) => {
+        Alert.alert('Error!', error.message);
+        return false;
+    });
+}
+ 
+
+
     render() {
+    
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', margin: 35 }}>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginLeft: 10 }}>
+         
                 <View style={{ width:"100%"}}>
+                    <Text style={globalStyle.previousPageButton} onPress={() => this.props.navigation.navigate('LogIn')}>
+                        {"<--"}
+                    </Text>
                     <Image
                         source={require('../icons/logo.png')}
-                        style={{width: "100%", height: 70, marginBottom: 50}}
+                        style={{width: "100%", height: 50, marginBottom: 10}}
                         resizeMode="contain"
                     />
-                    <label style = {{ marginLeft: 10, fontSize: 17 , fontFamily:"sans-serif", color : "purple"}}>
-                      Pseudo : 
-                    </label>
-                    <Input
-                        placeholder="Pseudo"
-                        onChangeText={value => this.setState({ pseudoInput: value , errorPseudo:"" })}
-                        errorMessage={this.state.errorPseudo}
+        
+                    <Input 
+                        label="Pseudo :"
+                        labelStyle={globalStyle.labelStyle}
+                        style={globalStyle.input}
+                        //defaultValue={this.state.userUserName}
+                        onChangeText={value => this.setState({ userUserName: value , errorUserName:""}) }
+                        errorMessage={this.state.errorUserName}
                     />
-                    <label style = {{ marginLeft: 10, fontSize: 17 , fontFamily:"sans-serif", color : "purple"}}>
-                      Nom : 
-                    </label>
                     <Input
-                        placeholder="Nom"
-                        onChangeText={value => this.setState({ nameInput: value, errorName:"" })}
-                        errorMessage={this.state.errorName}
+                        label="Nom :"
+                        labelStyle={globalStyle.labelStyle}
+                        style={globalStyle.input}
+                        //defaultValue={this.state.userLastName}
+                        onChangeText={value => this.setState({ userLastName: value, errorLastName:""  })}
+                        errorMessage={this.state.errorLastName}
                     />
-                    <label style = {{ marginLeft: 10, fontSize: 17 , fontFamily:"sans-serif", color : "purple"}}>
-                      Prénom : 
-                    </label>
-                    <Input
-                        placeholder="Prénom"
-                        onChangeText={value => this.setState({ firstNameInput: value , errorFirstName :"" })}
+                    <Input 
+                        label="Prénom :"
+                        labelStyle={globalStyle.labelStyle}
+                        style={globalStyle.input}
+                        //defaultValue={this.state.userFirstName}
+                        onChangeText={value => this.setState({ userFirstName: value })}
                         errorMessage={this.state.errorFirstName}
                     />
-                    <label style = {{ marginLeft: 10, fontSize: 17 , fontFamily:"sans-serif", color : "purple"}}>
-                      Mot de passe : 
-                    </label>
+                   {/*  <Input
+                        label="Date de naissance :"
+                        labelStyle={globalStyle.labelStyle} 
+                        style={globalStyle.input}
+                        defaultValue={this.state.userBirthDate}
+                        onChangeText={value => this.setState({ userBirthdate: value,   errorBirthdate :"" })}
+                        errorMessage={this.state.errorBirthdate}
+                    />   */}
                     <Input 
-                        placeholder="Mot de passe" 
+                        label="Mot de passe :"
+                        labelStyle={globalStyle.labelStyle}
+                        style={globalStyle.input}
                         //secureTextEntry={true} 
-                        onChangeText={value => this.setState({ passwordInput: value , errorPassword : ""  })}
+                        //defaultValue={this.state.userPassword}
+                        onChangeText={value => this.setState({ userPassword: value , errorPassword : ""  })}
                         errorMessage={this.state.errorPassword}
                         
                     />
-                    <label style = {{ marginLeft: 10, fontSize: 17 , fontFamily:"sans-serif", color : "purple"}}>
-                      Confirmer mot de passe : 
-                    </label>
-                    <Input 
-                        placeholder="Confirmer mot de passe" 
+                   
+                   <Input 
+                        label="Confirmer mot de passe :"
+                        labelStyle={globalStyle.labelStyle}
+                        style={globalStyle.input} 
                         //secureTextEntry={true} 
-                        onChangeText={value => this.setState({ confirmPasswordInput: value , errorComfirmPassword:"" })}
+                        //defaultValue={}
+                        onChangeText={value => this.setState({ confirmuserPassword: value , errorComfirmPassword:"" })}
                         errorMessage={this.state.errorComfirmPassword}
                         
                     />
-                    <label style = {{ marginLeft: 10, fontSize: 17 , fontFamily:"sans-serif", color : "purple"}}>
-                      Adresse E-Mail : 
-                    </label>
+                    
                     <Input
-                        placeholder="Adresse E-Mail"
-                        onChangeText={value => this.setState({ emailInput: value , errorEmail:"" })}
+                        label="Adresse E-Mail :"
+                        labelStyle={globalStyle.labelStyle}
+                        style={globalStyle.input}
+                        //defaultValue={this.state.userEmail}
+                        onChangeText={value => this.setState({ userEmail: value , errorEmail:"" })}
                         errorMessage={this.state.errorEmail}
                     />
                     <Button title="Inscription"
                             containerStyle={globalStyle.buttonContainer}
                             buttonStyle={globalStyle.button}
                             onPress={this.tryToSignIn}/>
-
-                    
-                </View>    
-                
-                <View style={{ width:"100%", position: "absolute", bottom: 0, flexDirection: 'row', justifyContent: 'space-between' }}>  
+                    </View>   
+        
+                <View style={{ width:"80%", position: "absolute", bottom: 0, flexDirection: 'row', justifyContent: 'space-between' }}>  
+                    <Text onPress={() => this.props.navigation.navigate('LogIn')}>CNX</Text>
                     <Text onPress={() => this.props.navigation.navigate('CGU')}>CGU</Text>
-                    <Text onPress={() => this.props.navigation.navigate('ContactUs')}>Nous contacter</Text>
+                    <Text onPress={() => this.props.navigation.navigate('ContactUs')}>CONTACT</Text>
+               {/*      <Text onPress={() => this.props.navigation.navigate('Profile')}>Profile</Text> */}
+                    {/* <Text onPress={this.logOut}>Exit</Text> */}
                 </View> 
+            
             </View>
         );
     }
