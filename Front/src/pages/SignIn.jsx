@@ -126,22 +126,22 @@ class SignIn extends Component {
             }
   };
   
-  async logOut() {
-    await Parse.User.logOut()
-    .then(async () => {
-        const currentUser = await Parse.User.currentAsync();
-        if (currentUser === null) {
-        Alert.alert('Déconnexion', 'Tu as été déconnecté !');
-        }
-        this.props.navigation.navigate('LogIn');
-        return true;
-    })
-    .catch((error) => {
-        Alert.alert('Error!', error.message);
-        return false;
-    });
-}
- 
+    async logOut() {
+        await Parse.User.logOut()
+        .then(async () => {
+            const currentUser = await Parse.User.currentAsync();
+            if (currentUser === null) {
+            Alert.alert('Déconnexion', 'Tu as été déconnecté !');
+            }
+            this.props.navigation.navigate('LogIn');
+            return true;
+        })
+        .catch((error) => {
+            Alert.alert('Error!', error.message);
+            return false;
+        });
+    }
+    
 
 
     render() {
