@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Text, View, TouchableHighlight, Image } from 'react-native';
+import { Alert, Text, View, TouchableHighlight, Image, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AntDesign } from '@expo/vector-icons';
@@ -129,166 +129,168 @@ class Objectives extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', margin: 20 }}>
+            <View style={{ flex: 1, justifyContent: 'center', marginLeft: 20 }}>
+                <ScrollView>
 
-                <Text style={{ color: "#6a09b5", fontSize: 24, fontWeight: "bold", marginBottom: 20}}>Fixe tes objectifs</Text>
+                    <Text style={{ color: "#6a09b5", fontSize: 24, fontWeight: "bold", marginBottom: 20, marginTop: 20}}>Fixe tes objectifs</Text>
 
-                <View style={{ flexDirection: "row"}}>
-                    <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 20, marginTop: 20 }}>Physique</Text>
-                    <Button title="Sauvegarder"
-                        containerStyle={globalStyle.buttonContainer}
-                        buttonStyle={{backgroundColor: "#6a09b5", borderRadius: 25, margin: 10 }}
-                        titleStyle={{ fontSize: 14}}
-                        onPress={this.updateData}/>
-                </View>
+                    <View style={{ flexDirection: "row"}}>
+                        <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 20, marginTop: 20 }}>Physique</Text>
+                        <Button title="Sauvegarder"
+                            containerStyle={globalStyle.buttonContainer}
+                            buttonStyle={{backgroundColor: "#6a09b5", borderRadius: 25, margin: 10 }}
+                            titleStyle={{ fontSize: 14}}
+                            onPress={this.updateData}/>
+                    </View>
 
-                <View style={{ flexDirection: "row", flexWrap:"wrap" }}>
-                    <TouchableHighlight
-                        style={{margin: "auto", marginRight:20, width: 80, marginBottom: 15}}
-                        underlayColor={'#4e4273'}
-                        onPress={() => this.setState({yoga : { count : this.state.yoga.count + 1, objectId: this.state.yoga.objectId, }})}
-                    >
-                        <View style={{alignSelf: 'center'}}>
-                            <Image
-                                source={require('../icons/physique/yoga.png')}
-                                style={{width: 60, height: 70, resizeMode: 'contain'}}
-                            />
-                            <Text style={{alignSelf: 'center'}}>Yoga</Text>
-                            <View style={{ flexDirection: "row"}}>
-                                <Text style={{alignSelf: 'center'}}>{this.state.yoga.count} / mois</Text>
-                                <TouchableHighlight underlayColor={'#4e4273'} onPress={() => this.setState({yoga : { count : 0, objectId: this.state.yoga.objectId, }})}>
-                                    <View>
-                                        <AntDesign name="closecircle" size={15} color="red" style={{paddingRight: 5, marginLeft: 8}}/>
-                                    </View>
-                                </TouchableHighlight>
+                    <View style={{ flexDirection: "row", flexWrap:"wrap" }}>
+                        <TouchableHighlight
+                            style={globalStyle.objectivesContainer}
+                            underlayColor={'#4e4273'}
+                            onPress={() => this.setState({yoga : { count : this.state.yoga.count + 1, objectId: this.state.yoga.objectId, }})}
+                        >
+                            <View style={{alignSelf: 'center'}}>
+                                <Image
+                                    source={require('../icons/physique/yoga.png')}
+                                    style={globalStyle.objectivesIcon}
+                                />
+                                <Text style={{alignSelf: 'center'}}>Yoga</Text>
+                                <View style={{ flexDirection: "row"}}>
+                                    <Text style={{alignSelf: 'center'}}>{this.state.yoga.count} / mois</Text>
+                                    <TouchableHighlight underlayColor={'#4e4273'} onPress={() => this.setState({yoga : { count : 0, objectId: this.state.yoga.objectId, }})}>
+                                        <View>
+                                            <AntDesign name="closecircle" size={15} color="red" style={{paddingRight: 5, marginLeft: 8}}/>
+                                        </View>
+                                    </TouchableHighlight>
+                                </View>
                             </View>
-                        </View>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        style={{margin: "auto", marginRight:20, width: 80, marginBottom: 15}}
-                        underlayColor={'#4e4273'}
-                        onPress={() => this.setState({running : { count : this.state.running.count + 1, objectId: this.state.running.objectId, }})}
-                    >
-                        <View style={{alignSelf: 'center'}}>
-                            <Image
-                                source={require('../icons/physique/course.png')}
-                                style={{width: 60, height: 70, resizeMode: 'contain'}}
-                            />
-                            <Text style={{alignSelf: 'center'}}>Course</Text>
-                            <View style={{ flexDirection: "row"}}>
-                                <Text style={{alignSelf: 'center'}}>{this.state.running.count} / mois</Text>
-                                <TouchableHighlight underlayColor={'#4e4273'} onPress={() => this.setState({running : { count : 0, objectId: this.state.running.objectId, }})}>
-                                    <View>
-                                        <AntDesign name="closecircle" size={15} color="red" style={{paddingRight: 5, marginLeft: 8}}/>
-                                    </View>
-                                </TouchableHighlight>
+                        </TouchableHighlight>
+                        <TouchableHighlight
+                            style={globalStyle.objectivesContainer}
+                            underlayColor={'#4e4273'}
+                            onPress={() => this.setState({running : { count : this.state.running.count + 1, objectId: this.state.running.objectId, }})}
+                        >
+                            <View style={{alignSelf: 'center'}}>
+                                <Image
+                                    source={require('../icons/physique/course.png')}
+                                    style={globalStyle.objectivesIcon}
+                                />
+                                <Text style={{alignSelf: 'center'}}>Course</Text>
+                                <View style={{ flexDirection: "row"}}>
+                                    <Text style={{alignSelf: 'center'}}>{this.state.running.count} / mois</Text>
+                                    <TouchableHighlight underlayColor={'#4e4273'} onPress={() => this.setState({running : { count : 0, objectId: this.state.running.objectId, }})}>
+                                        <View>
+                                            <AntDesign name="closecircle" size={15} color="red" style={{paddingRight: 5, marginLeft: 8}}/>
+                                        </View>
+                                    </TouchableHighlight>
+                                </View>
                             </View>
-                        </View>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        style={{margin: "auto", marginRight:20, width: 80, marginBottom: 15}}
-                        underlayColor={'#4e4273'}
-                        onPress={() => this.setState({walking : { count : this.state.walking.count + 1, objectId: this.state.walking.objectId, }})}
-                    >
-                        <View style={{alignSelf: 'center'}}>
-                            <Image
-                                source={require('../icons/physique/marche.png')}
-                                style={{width: 60, height: 70, resizeMode: 'contain'}}
-                            />
-                            <Text style={{alignSelf: 'center'}}>Marche</Text>
-                            <View style={{ flexDirection: "row"}}>
-                                <Text style={{alignSelf: 'center'}}>{this.state.walking.count} / mois</Text>
-                                <TouchableHighlight underlayColor={'#4e4273'} onPress={() => this.setState({walking : { count : 0, objectId: this.state.walking.objectId, }})}>
-                                    <View>
-                                        <AntDesign name="closecircle" size={15} color="red" style={{paddingRight: 5, marginLeft: 8}}/>
-                                    </View>
-                                </TouchableHighlight>
+                        </TouchableHighlight>
+                        <TouchableHighlight
+                            style={globalStyle.objectivesContainer}
+                            underlayColor={'#4e4273'}
+                            onPress={() => this.setState({walking : { count : this.state.walking.count + 1, objectId: this.state.walking.objectId, }})}
+                        >
+                            <View style={{alignSelf: 'center'}}>
+                                <Image
+                                    source={require('../icons/physique/marche.png')}
+                                    style={globalStyle.objectivesIcon}
+                                />
+                                <Text style={{alignSelf: 'center'}}>Marche</Text>
+                                <View style={{ flexDirection: "row"}}>
+                                    <Text style={{alignSelf: 'center'}}>{this.state.walking.count} / mois</Text>
+                                    <TouchableHighlight underlayColor={'#4e4273'} onPress={() => this.setState({walking : { count : 0, objectId: this.state.walking.objectId, }})}>
+                                        <View>
+                                            <AntDesign name="closecircle" size={15} color="red" style={{paddingRight: 5, marginLeft: 8}}/>
+                                        </View>
+                                    </TouchableHighlight>
+                                </View>
                             </View>
-                        </View>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        style={{margin: "auto", marginRight:20, width: 80, marginBottom: 15}}
-                        underlayColor={'#4e4273'}
-                        onPress={() => this.setState({stretching : { count : this.state.stretching.count + 1, objectId: this.state.stretching.objectId, }})}
-                    >
-                        <View style={{alignSelf: 'center'}}>
-                            <Image
-                                source={require('../icons/physique/etirement.png')}
-                                style={{width: 60, height: 70, resizeMode: 'contain'}}
-                            />
-                            <Text style={{alignSelf: 'center'}}>Étirements</Text>
-                            <View style={{ flexDirection: "row"}}>
-                                <Text style={{alignSelf: 'center'}}>{this.state.stretching.count} / mois</Text>
-                                <TouchableHighlight underlayColor={'#4e4273'} onPress={() => this.setState({stretching : { count : 0, objectId: this.state.stretching.objectId, }})}>
-                                    <View>
-                                        <AntDesign name="closecircle" size={15} color="red" style={{paddingRight: 5, marginLeft: 8}}/>
-                                    </View>
-                                </TouchableHighlight>
+                        </TouchableHighlight>
+                        <TouchableHighlight
+                            style={globalStyle.objectivesContainer}
+                            underlayColor={'#4e4273'}
+                            onPress={() => this.setState({stretching : { count : this.state.stretching.count + 1, objectId: this.state.stretching.objectId, }})}
+                        >
+                            <View style={{alignSelf: 'center'}}>
+                                <Image
+                                    source={require('../icons/physique/etirement.png')}
+                                    style={globalStyle.objectivesIcon}
+                                />
+                                <Text style={{alignSelf: 'center'}}>Étirements</Text>
+                                <View style={{ flexDirection: "row"}}>
+                                    <Text style={{alignSelf: 'center'}}>{this.state.stretching.count} / mois</Text>
+                                    <TouchableHighlight underlayColor={'#4e4273'} onPress={() => this.setState({stretching : { count : 0, objectId: this.state.stretching.objectId, }})}>
+                                        <View>
+                                            <AntDesign name="closecircle" size={15} color="red" style={{paddingRight: 5, marginLeft: 8}}/>
+                                        </View>
+                                    </TouchableHighlight>
+                                </View>
                             </View>
-                        </View>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        style={{margin: "auto", marginRight:20, width: 80, marginBottom: 15}}
-                        underlayColor={'#4e4273'}
-                        onPress={() => this.setState({swimming : { count : this.state.swimming.count + 1, objectId: this.state.swimming.objectId, }})}
-                    >
-                        <View style={{alignSelf: 'center'}}>
-                            <Image
-                                source={require('../icons/physique/natation.png')}
-                                style={{width: 60, height: 70, resizeMode: 'contain'}}
-                            />
-                            <Text style={{alignSelf: 'center'}}>Natation</Text>
-                            <View style={{ flexDirection: "row"}}>
-                                <Text style={{alignSelf: 'center'}}>{this.state.swimming.count} / mois</Text>
-                                <TouchableHighlight underlayColor={'#4e4273'} onPress={() => this.setState({swimming : { count : 0, objectId: this.state.swimming.objectId, }})}>
-                                    <View>
-                                        <AntDesign name="closecircle" size={15} color="red" style={{paddingRight: 5, marginLeft: 8}}/>
-                                    </View>
-                                </TouchableHighlight>
+                        </TouchableHighlight>
+                        <TouchableHighlight
+                            style={globalStyle.objectivesContainer}
+                            underlayColor={'#4e4273'}
+                            onPress={() => this.setState({swimming : { count : this.state.swimming.count + 1, objectId: this.state.swimming.objectId, }})}
+                        >
+                            <View style={{alignSelf: 'center'}}>
+                                <Image
+                                    source={require('../icons/physique/natation.png')}
+                                    style={globalStyle.objectivesIcon}
+                                />
+                                <Text style={{alignSelf: 'center'}}>Natation</Text>
+                                <View style={{ flexDirection: "row"}}>
+                                    <Text style={{alignSelf: 'center'}}>{this.state.swimming.count} / mois</Text>
+                                    <TouchableHighlight underlayColor={'#4e4273'} onPress={() => this.setState({swimming : { count : 0, objectId: this.state.swimming.objectId, }})}>
+                                        <View>
+                                            <AntDesign name="closecircle" size={15} color="red" style={{paddingRight: 5, marginLeft: 8}}/>
+                                        </View>
+                                    </TouchableHighlight>
+                                </View>
                             </View>
-                        </View>
-                    </TouchableHighlight>
-                </View>
+                        </TouchableHighlight>
+                    </View>
 
-                <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 20, marginTop: 20}}>Alimentation</Text>
-                <View style={{ flexDirection: "row", alignContent: "center", flexWrap:"wrap", flex: 2 }}>
-                    <TouchableHighlight style={{margin: "auto", width: 80, marginBottom: 15}} underlayColor={'#4e4273'}>
-                        <View style={{alignSelf: 'center'}}>
-                            <Image
-                                source={require('../icons/alimentation/fruits.png')}
-                                style={{width: 60, height: 70, resizeMode: 'contain'}}
-                            />
-                            <Text style={{alignSelf: 'center'}}>Fruits</Text>
-                        </View>
-                    </TouchableHighlight>
-                    <TouchableHighlight style={{margin: "auto", width: 80, marginBottom: 15}} underlayColor={'#4e4273'}>
-                        <View style={{alignSelf: 'center'}}>
-                            <Image
-                                source={require('../icons/alimentation/legumes.png')}
-                                style={{width: 60, height: 70, resizeMode: 'contain'}}
-                            />
-                            <Text style={{alignSelf: 'center'}}>Légumes</Text>
-                        </View>
-                    </TouchableHighlight>
-                    <TouchableHighlight style={{margin: "auto", width: 80, marginBottom: 15}} underlayColor={'#4e4273'}>
-                        <View style={{alignSelf: 'center'}}>
-                            <Image
-                                source={require('../icons/alimentation/bio.png')}
-                                style={{width: 60, height: 70, resizeMode: 'contain'}}
-                            />
-                            <Text style={{alignSelf: 'center'}}>Bio</Text>
-                        </View>
-                    </TouchableHighlight>
-                    <TouchableHighlight style={{margin: "auto", width: 80, marginBottom: 15}} underlayColor={'#4e4273'}>
-                        <View style={{alignSelf: 'center'}}>
-                            <Image
-                                source={require('../icons/alimentation/equilibre.png')}
-                                style={{width: 60, height: 70, resizeMode: 'contain'}}
-                            />
-                            <Text style={{alignSelf: 'center'}}>Équilibré</Text>
-                        </View>
-                    </TouchableHighlight>
-                </View>
+                    <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 20, marginTop: 20}}>Alimentation</Text>
+                    <View style={{ flexDirection: "row", alignContent: "center", flexWrap:"wrap", flex: 2 }}>
+                        <TouchableHighlight style={globalStyle.objectivesContainer} underlayColor={'#4e4273'}>
+                            <View style={{alignSelf: 'center'}}>
+                                <Image
+                                    source={require('../icons/alimentation/fruits.png')}
+                                    style={{width: 60, height: 70, resizeMode: 'contain'}}
+                                />
+                                <Text style={{alignSelf: 'center'}}>Fruits</Text>
+                            </View>
+                        </TouchableHighlight>
+                        <TouchableHighlight style={globalStyle.objectivesContainer} underlayColor={'#4e4273'}>
+                            <View style={{alignSelf: 'center'}}>
+                                <Image
+                                    source={require('../icons/alimentation/legumes.png')}
+                                    style={{width: 60, height: 70, resizeMode: 'contain'}}
+                                />
+                                <Text style={{alignSelf: 'center'}}>Légumes</Text>
+                            </View>
+                        </TouchableHighlight>
+                        <TouchableHighlight style={globalStyle.objectivesContainer} underlayColor={'#4e4273'}>
+                            <View style={{alignSelf: 'center'}}>
+                                <Image
+                                    source={require('../icons/alimentation/bio.png')}
+                                    style={{width: 60, height: 70, resizeMode: 'contain'}}
+                                />
+                                <Text style={{alignSelf: 'center'}}>Bio</Text>
+                            </View>
+                        </TouchableHighlight>
+                        <TouchableHighlight style={globalStyle.objectivesContainer} underlayColor={'#4e4273'}>
+                            <View style={{alignSelf: 'center'}}>
+                                <Image
+                                    source={require('../icons/alimentation/equilibre.png')}
+                                    style={{width: 60, height: 70, resizeMode: 'contain'}}
+                                />
+                                <Text style={{alignSelf: 'center'}}>Équilibré</Text>
+                            </View>
+                        </TouchableHighlight>
+                    </View>
+                </ScrollView>
             </View>
         );
     }
