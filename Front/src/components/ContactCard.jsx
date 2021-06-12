@@ -30,7 +30,7 @@ class ContactCard extends Component {
 
     render() {
         return (
-            <Card onClick={this.goToMessagingPage}>
+            <Card onPress={this.goToMessagingPage}>
                 {/* <Card.Image source={require('../icons/girl.png')}></Card.Image> */}
                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                     <Card.Title style={{textAlign:"center", width:"100%"}}>

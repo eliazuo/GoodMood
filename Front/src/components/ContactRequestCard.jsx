@@ -101,12 +101,12 @@ class ContactRequestCard extends Component {
                         incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</Text>
                     <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                         <Button title="Accepter"
-                                titleStyle={{fontSize: "0.9rem"}}
+                                titleStyle={{fontSize: 14}}
                                 containerStyle={{marginTop: 10, marginRight: 10, marginLeft: 10}}
                                 buttonStyle={globalStyle.button2}
                                 onPress={this.acceptRequest}/>
                         <Button title="Refuser"
-                                titleStyle={{fontSize: "0.9rem"}}
+                                titleStyle={{fontSize: 14}}
                                 containerStyle={{marginTop: 10, marginRight: 10, marginLeft: 10}}
                                 buttonStyle={globalStyle.button2}
                                 onPress={this.refuseRequest}/>

@@ -86,28 +86,28 @@ export default StyleSheet.create({
     buttonTab: {
         backgroundColor:  "#ffffff",
         borderRadius: 25,
-        borderWidth: "1px",
+        borderWidth: 1,
         borderColor: "#6a09b5",
-        borderCollapse: "separate",
+        //borderCollapse: "separate",
         paddingTop: 0,
         paddingBottom: 0
     },
     buttonTabActive: {
         backgroundColor:  "#6a09b5",
         borderRadius: 25,
-        borderWidth: "1px",
+        borderWidth: 1,
         borderColor: "#6a09b5",
-        borderCollapse: "separate",
+        //borderCollapse: "separate",
         paddingTop: 0,
         paddingBottom: 0
     },
     title1: {
-        fontSize: "1.4rem",
+        fontSize: 22,
         color: "#6a09b5",
         fontWeight: "bold"
     },
     title2: {
-        fontSize: "1.1rem",
+        fontSize: 17,
         color: "#6a09b5",
         fontWeight: "bold"
     }
