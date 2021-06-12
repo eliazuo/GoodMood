@@ -104,11 +104,14 @@ class Profile extends Component {
                     />
                     <Input
                         label="Anniversaire"
-                        labelStyle={globalStyle.labelStyle}
+                        labelStyle={globalStyle.labelStyle} 
                         defaultValue={this.state.userBirthDate}
                         onChangeText={value => this.setState({ userBirthDate: value })}
                     />
+
+                    
                     <DatePicker
+                    
                         style={{width: 200}}
                         date={this.state.userBirthDate}
                         mode="date"
@@ -129,9 +132,11 @@ class Profile extends Component {
                             }
                         }}
                         onDateChange={(date) => {this.setState({userBirthDate: date})}}
-                    />
+                     />
+                      
+                    
                     <Button title="Sauvegarder"
-                        containerStyle={globalStyle.buttonContainer}
+                        containerStyle={globalStyle.buttonContainer} 
                         buttonStyle={globalStyle.button}
                         onPress={this.updateData}/>
                 </View>
