@@ -11,12 +11,13 @@ import SignIn from './src/pages/SignIn';
 import CGU from './src/pages/CGU';
 import ContactUs from './src/pages/ContactUs';
 import Profile from './src/pages/Profile';
+import Messaging from './src/pages/Messaging';
 
 // Connection to back4app
 import Parse from "parse/react-native.js";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 Parse.setAsyncStorage(AsyncStorage);
-Parse.initialize('6i1YbghL132B74InN4uiHp7BknMfMSTw7bj0kOEN','G1MlImY3f8yf8TCZUvZhI2AVdBBDOvhuj2g66gGH');
+Parse.initialize('RoRhb1PpZrY1KJPbzQoN1YUWFdnrlg73LVmgCrky','txUH94PNNTccgACKD3O4yoqNIb5jQzz0KNhRfJLS');
 Parse.serverURL = 'https://parseapi.back4app.com/';
 
 export default function App() {
@@ -32,8 +33,9 @@ export default function App() {
                     <Stack.Screen name="ContactUs" component={ContactUs}/>
                     <Stack.Screen name="MainApp" component={MainApp}/>
                     <Stack.Screen name="Profile" component={Profile}/>
+                    <Stack.Screen name="Messaging" component={Messaging}/>
                 </Stack.Navigator>
-                </NavigationContainer>
+            </NavigationContainer>
         </SafeAreaProvider>
     );
 }
