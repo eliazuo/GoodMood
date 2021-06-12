@@ -46,18 +46,6 @@ class Documentation extends Component {
                 <Text style= {{fontStyle: 'italic', textDecorationLine: 'underline', color: '#4C0C5B'}} onPress = {() => this.props.navigation.navigate('Articles')}>Lire + {"\n"}</Text>
             </View>
 
-            <View style={{width: 60, borderRadius: 10, marginLeft: 270}}>
-              <Button
-                //onPress={onPressLearnMore}
-                //onPress={() => Alert.alert('Simple Button pressed')}
-                title="Lire +"
-                color='#4C0C5B'
-                containerStyle={styles.buttonContainer}
-                buttonStyle={styles.button}
-                onPress={() => this.props.navigation.navigate('Articles')}
-              /> 
-            </View>
-
             </ScrollView>
             </SafeAreaView>
 
