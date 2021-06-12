@@ -10,6 +10,7 @@ import SignIn from './src/pages/SignIn';
 import CGU from './src/pages/CGU';
 import ContactUs from './src/pages/ContactUs';
 import Profile from './src/pages/Profile';
+import Messaging from './src/pages/Messaging';
 
 // Connection to back4app
 import Parse from "parse/react-native.js";
@@ -31,8 +32,9 @@ export default function App() {
                     <Stack.Screen name="ContactUs" component={ContactUs}/>
                     <Stack.Screen name="MainApp" component={MainApp}/>
                     <Stack.Screen name="Profile" component={Profile}/>
+                    <Stack.Screen name="Messaging" component={Messaging}/>
                 </Stack.Navigator>
-                </NavigationContainer>
+            </NavigationContainer>
         </SafeAreaProvider>
     );
 }
