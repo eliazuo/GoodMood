@@ -104,7 +104,8 @@ export default StyleSheet.create({
     title1: {
         fontSize: 22,
         color: "#6a09b5",
-        fontWeight: "bold"
+        fontWeight: "bold",
+        marginBottom: 15
     },
     title2: {
         fontSize: 17,
@@ -122,5 +123,12 @@ export default StyleSheet.create({
         height: 70,
         resizeMode: 'contain',
         alignSelf: 'center'
+    },
+    objectivesIconChart: {
+        //display:"inline-block", 
+        width:40, 
+        height:40,
+        maxWidth:"20%", 
+        maxHeight:"100%"
     }
 });
