@@ -40,8 +40,9 @@ class CalendarPage extends Component {
     }
 
     retrieveUserMoodList(){
-        var that = this;
-        this.getUserMoodList().then(data => this.getUserMoodListCallback(data));
+        this.getUserMoodList().then(data => 
+            this.getUserMoodListCallback(data)
+        );
     }
 
     getUserMoodListCallback(data){
