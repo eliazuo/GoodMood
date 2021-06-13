@@ -38,7 +38,7 @@ class Profile extends Component {
 
         user.set('firstName', this.state.userFirstName);
         user.set('lastName', this.state.userLastName);
-        user.set('birthDate', new Date(birthDateString));
+        //user.set('birthDate', new Date(birthDateString));
         await user.save().then(
             Alert.alert('Mis à jour', 'Ton profil a été mis à jour !')
         )

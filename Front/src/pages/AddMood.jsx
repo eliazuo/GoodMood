@@ -60,7 +60,7 @@ class AddMood extends Component {
         let allObjectives = await parseQuery.find();
         
         allObjectives.map( objective => {
-            setData(objective.id, false);
+            this.setData(objective.id, false);
         })
 
         const queryUser = new Parse.Query('_User');
@@ -72,7 +72,7 @@ class AddMood extends Component {
         let allUserObjectives = await queryObjectives.find();
         allUserObjectives.map( objective => {
             if (Moment(objective.get("date")).format('DD MMMM YYYY') == Moment(this.props.selectedDate).format('DD MMMM YYYY')) {
-                setData(objective.get("objective").id, true);
+                this.setData(objective.get("objective").id, true);
             }
         })
     }
