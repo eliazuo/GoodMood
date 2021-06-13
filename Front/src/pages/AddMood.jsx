@@ -156,7 +156,7 @@ class AddMood extends Component {
 
             let newFeeling = new Parse.Object('UserFeeling');
             newFeeling.set('user', user);
-            newFeeling.set('date', this.props.selectedDate);
+            newFeeling.set('date', new Date(this.props.selectedDate));
             newFeeling.set('feeling', feeling);
             try {
                 await newFeeling.save();
