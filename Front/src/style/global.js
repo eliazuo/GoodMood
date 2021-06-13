@@ -117,10 +117,25 @@ export default StyleSheet.create({
         width: 80,
         marginBottom: 15
     },
+    objectivesDoneContainer: {
+        margin: "auto",
+        marginRight:20,
+        width: 80,
+        marginBottom: 15,
+        borderWidth: 2,
+        borderColor: '#4e4273',
+        borderRadius: 15
+    },
     objectivesIcon: {
         width: 60,
         height: 70,
         resizeMode: 'contain',
+        alignSelf: 'center'
+    },
+    circleShape: {
+        width: 50,
+        height: 50,
+        borderRadius: 50/2,
         alignSelf: 'center'
     }
 });
