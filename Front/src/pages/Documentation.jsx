@@ -21,8 +21,7 @@ class Documentation extends Component {
                 <Text style={{textAlign: 'justify'}} numberOfLines={6}>La motivation représente un phénomène propre à chaque individu et qui est la représentation 
                   d’une énergie interne qui détermine l’action. La motivation va ainsi te pousser et te permettre de réaliser une action ou 
                   d’atteindre un objectif.</Text>
-                
-                  <Text style= {{fontStyle: 'italic', textDecorationLine: 'underline', color: '#4C0C5B'}} onPress = {() =>this.props.navigation.navigate('Articles') }>Lire + {"\n"}</Text>
+                <Text style= {{fontStyle: 'italic', textDecorationLine: 'underline', color: '#4C0C5B'}} onPress = {() =>this.props.navigation.navigate('Articles') }>Lire + {"\n"}</Text>
             </View>
 
             <View style={styles.reviewBoxStyle}>

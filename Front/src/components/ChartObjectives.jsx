@@ -178,6 +178,9 @@ class ChartObjectives extends Component {
                     segments={5}
                     chartConfig={{
                         decimalPlaces: 0,
+                        backgroundColor: "white",
+                        backgroundGradientFrom: "white",
+                        backgroundGradientTo: "white",
                         fillShadowGradient: "#009687",
                         fillShadowGradientOpacity: 1,
                         color: () => "#ff4545",
