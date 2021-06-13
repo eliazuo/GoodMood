@@ -119,7 +119,7 @@ class ChartMood extends Component {
 
     
     render() {
-        const data = this.getData().data;
+        const data = this.getData().data ? this.getData().data : [0];
         const labels = this.getData().labels;
         return (
             <View style={{position:"relative"}}>
@@ -170,12 +170,12 @@ class ChartMood extends Component {
                 />
                 <View style={{display:"flex", flexDirection:"column", alignItems:"center",
                           position:"absolute", top:35, left:25}}>
-                    <View style={{ backgroundColor:"#41ACDA", borderRadius: 10, width:20, marginBottom:15}}> </View>
-                    <View style={{ backgroundColor:"#78C3AE", borderRadius: 10, width:20, marginBottom:15}}> </View>
-                    <View style={{ backgroundColor:"#BCDA80", borderRadius: 10, width:20, marginBottom:15}}> </View>
-                    <View style={{ backgroundColor:"#FFF152", borderRadius: 10, width:20, marginBottom:15}}> </View>
-                    <View style={{ backgroundColor:"#FFA252", borderRadius: 10, width:20, marginBottom:15}}> </View>
-                    <View style={{ backgroundColor:"#FF5252", borderRadius: 10, width:20, marginBottom:15}}> </View>
+                    <View style={{ backgroundColor:"#41ACDA", borderRadius: 10, width:20, marginBottom:15}}><Text> </Text></View>
+                    <View style={{ backgroundColor:"#78C3AE", borderRadius: 10, width:20, marginBottom:15}}><Text> </Text></View>
+                    <View style={{ backgroundColor:"#BCDA80", borderRadius: 10, width:20, marginBottom:15}}><Text> </Text></View>
+                    <View style={{ backgroundColor:"#FFF152", borderRadius: 10, width:20, marginBottom:15}}><Text> </Text></View>
+                    <View style={{ backgroundColor:"#FFA252", borderRadius: 10, width:20, marginBottom:15}}><Text> </Text></View>
+                    <View style={{ backgroundColor:"#FF5252", borderRadius: 10, width:20, marginBottom:15}}><Text> </Text></View>
                 </View>
             </View>
         );
