@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Dimensions, ScrollView  } from 'react-native';
+import globalStyle from '../style/global.js';
+import ChartMood from '../components/ChartMood';
+import ChartObjectives from '../components/ChartObjectives';
 
 class Statistics extends Component {
 
   render() {
+
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Statistics page</Text>
-        </View>
+        <ScrollView style={{height: "100%", margin: 15}}>
+            <Text style={globalStyle.title1}>Ma progression</Text>
+            <ChartMood/>
+            <ChartObjectives/>
+        </ScrollView>
+        
     );
   }
 }

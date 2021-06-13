@@ -26,6 +26,13 @@ class Navbar extends Component {
                                 }}}
                 >
 
+<Tab.Screen name="Statistics" component={Statistics} 
+                                options={{
+                                    tabBarIcon: ({ focused, color, size }) => (
+                                        <Foundation name="graph-bar" color={color} size={size}/>
+                                    ),
+                                }}
+                    />
                     <Tab.Screen name="CalendarPage" component={CalendarPage} 
                                 options={{
                                     tabBarIcon: ({ focused, color, size }) => (
@@ -34,24 +41,18 @@ class Navbar extends Component {
                                 }}
                     />
 
-                    <Tab.Screen name="Statistics" component={Statistics} 
-                                options={{
-                                    tabBarIcon: ({ focused, color, size }) => (
-                                        <Foundation name="graph-bar" color={color} size={size}/>
-                                    ),
-                                }}
-                    />
+                    
                     <Tab.Screen name="Objectives" component={Objectives} 
                                 options={{
                                     tabBarIcon: ({ focused, color, size }) => (
-                                        <Ionicons name="book-outline" color={color} size={size}/>
+                                        <Foundation name="target" color={color} size={size}/>
                                     ),
                                 }}
                     />
                     <Tab.Screen name="Documentation" component={Documentation} 
                                 options={{
                                     tabBarIcon: ({ focused, color, size }) => (
-                                        <Foundation name="target" color={color} size={size}/>
+                                        <Ionicons name="book-outline" color={color} size={size}/>
                                     ),
                                 }}
                     />

@@ -26,7 +26,7 @@ class Contact extends Component {
             //<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <View style={{height: "100%", margin: 15}}>
                 <Text style={globalStyle.title1}>Entraide étudiants</Text>
-                <View style={{ flexDirection: 'row', justifyContent: "space-evenly", marginTop: 15, marginBottom: 15 }}>
+                <View style={{ flexDirection: 'row', justifyContent: "space-evenly", marginBottom: 15 }}>
                     <Button title={"Liste des étudiants"}
                             titleStyle={this.state.selectedTab == 0 ? {fontSize: 14, color:"white"} : {fontSize: 14, color:"black"}}
                             buttonStyle={this.state.selectedTab == 0 ? globalStyle.buttonTabActive : globalStyle.buttonTab}

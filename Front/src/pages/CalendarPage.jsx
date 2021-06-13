@@ -111,7 +111,7 @@ class CalendarPage extends Component {
     }
 
     getCalendarCaseStyle(color){
-        var test = {
+        var style = {
             container: {
                 backgroundColor: color,
                 borderRadius: 10
@@ -121,7 +121,7 @@ class CalendarPage extends Component {
                 //fontWeight: 'bold'
             }
         }
-        return test;
+        return style;
     }
 
     handleDayClick(date){

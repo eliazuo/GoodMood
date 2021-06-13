@@ -51,7 +51,6 @@ class SignIn extends Component {
         user.set('updatedAt', todaysDate); 
         user.set('helpState', 0); 
 
-        //verification des champs saisis
         var isValid = true;
         var userUserName = this.state.userUserName;
         var userLastName = this.state.userLastName;
@@ -92,11 +91,9 @@ class SignIn extends Component {
 
             if( isValid)
             {
-                //alert('to create New object: ' + JSON.stringify(user));
                 try {
                     let userResult = await user.save();
                     console.log('User created', userResult);
-                   // alert('User created: ' + JSON.stringify(userResult));
                    alert('User created  succefully: ' + JSON.stringify(this.state.userUserName));
                   } catch (error) {
                     console.error('Error while creating user',this.state.userUserName+':'+ error);

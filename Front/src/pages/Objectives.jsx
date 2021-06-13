@@ -129,10 +129,10 @@ class Objectives extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', marginLeft: 20 }}>
+            <View style={{height: "100%", margin: 15}}>
                 <ScrollView>
 
-                    <Text style={{ color: "#6a09b5", fontSize: 24, fontWeight: "bold", marginBottom: 20, marginTop: 20}}>Fixe tes objectifs</Text>
+                    <Text style={globalStyle.title1}>Fixe tes objectifs</Text>
 
                     <View style={{ flexDirection: "row"}}>
                         <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 20, marginTop: 20 }}>Physique</Text>
