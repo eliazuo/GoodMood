@@ -44,7 +44,7 @@ class SignIn extends Component {
         let birthDateArray = this.state.userBirthDate.split("-");
         const birthDateString = birthDateArray[1] + "-" + birthDateArray[0] + "-" + birthDateArray[2] + ' 01:00:00';
         const birthDate = new Date(birthDateString);
-        user.set('birthDate', birthDate);
+        //user.set('birthDate', birthDate);
 
         const todaysDate = new Date(new Date().setHours(0,0,0,0));
         user.set('createdAt', todaysDate); 

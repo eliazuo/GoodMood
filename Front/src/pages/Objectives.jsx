@@ -36,21 +36,29 @@ class Objectives extends Component {
         };
 
         AsyncStorage.getItem('user').then((user) => {
-            this.setState({ user: JSON.parse(user) });
+            this.setState({ user: JSON.parse(user) }, this.getAllObjectives);
         })
         this.updateData = this.updateData.bind(this);
-        this.getAllObjectives();
+        this.setData = this.setData.bind(this);
     }
 
     async getAllObjectives() {
-        const parseQuery = new Parse.Query('Objectives');
+        const queryUser = new Parse.Query('_User');
+        queryUser.equalTo('objectId', this.state.user.objectId);
+        const user = await queryUser.first();
+
+        const parseQuery = new Parse.Query('UserSportObjectives');
         let allObjectives = await parseQuery.find();
-        allObjectives.map( objective => {
-            if (objective.attributes.userId == this.state.user.objectId) {
-                const type = objective.attributes.sportType;
-                const count = objective.attributes.count;
-                const objectId = objective.id;
-                switch(type) {
+        for (let objective of allObjectives) {
+            if (objective.get("user").id == user.id) {
+                const sport = objective.get("sport");
+
+                const querySport = new Parse.Query('Sport');
+                querySport.equalTo('objectId', sport.id);
+                const sportObject = await querySport.first();
+                const count = objective.get("value");
+                const objectId = sportObject.id;
+                switch(sportObject.get("name")) {
                     case "yoga":
                         this.setState({ 
                             yoga : {
@@ -93,45 +101,36 @@ class Objectives extends Component {
                         break;
                 }
             }
-        })
+        }
+    }
+
+    async setData(queryObjectives, objectId, count) {
+        const date = Moment(new Date()).format('DD-MM-YYYY');
+        let dateArray = date.split("-");
+        //let dateString = dateArray[2] + "-" + dateArray[1] + "-01-T04:00:00.000Z";
+        let dateString = dateArray[1] + "-01-" + dateArray[2] + " 04:00:00";
+
+        let querySport = new Parse.Query('Sport');
+        querySport.equalTo('objectId', objectId);
+        const sportObject = await querySport.first();
+        queryObjectives.equalTo('sport', sportObject);
+        const sports = await queryObjectives.find();
+        for (let sport of sports) {
+            if (Moment(sport.get("date")).format('DD-MM-YYYY').split("-")[1] == "06"){
+                sport.set('value', count);
+                sport.set('date', new Date(dateString));
+                sport.save();
+            }
+        }
     }
 
     async updateData(){
-        const date = Moment(new Date()).format('DD-MM-YYYY');
-        let dateArray = date.split("-");
-        let dateString = dateArray[1] + "-01-" + dateArray[2] + ' 02:00:00';
-
-        const queryObjectives = new Parse.Query('Objectives');
-        queryObjectives.equalTo('objectId', this.state.yoga.objectId);
-        const yoga = await queryObjectives.first();
-        yoga.set('count', this.state.yoga.count);
-        yoga.set('date', new Date(dateString));
-
-        queryObjectives.equalTo('objectId', this.state.running.objectId);
-        const running = await queryObjectives.first();
-        running.set('count', this.state.running.count);
-        running.set('date', new Date(dateString));
-
-        queryObjectives.equalTo('objectId', this.state.walking.objectId);
-        const walking = await queryObjectives.first();
-        walking.set('count', this.state.walking.count);
-        walking.set('date', new Date(dateString));
-
-        queryObjectives.equalTo('objectId', this.state.stretching.objectId);
-        const stretching = await queryObjectives.first();
-        stretching.set('count', this.state.stretching.count);
-        stretching.set('date', new Date(dateString));
-
-        queryObjectives.equalTo('objectId', this.state.swimming.objectId);
-        const swimming = await queryObjectives.first();
-        swimming.set('count', this.state.swimming.count);
-        swimming.set('date', new Date(dateString));
-
-        await yoga.save();
-        await running.save();
-        await walking.save();
-        await stretching.save();
-        await swimming.save().then(
+        const queryObjectives = new Parse.Query('UserSportObjectives');
+        this.setData(queryObjectives, this.state.yoga.objectId, this.state.yoga.count);
+        this.setData(queryObjectives, this.state.running.objectId, this.state.running.count);
+        this.setData(queryObjectives, this.state.walking.objectId, this.state.walking.count);
+        this.setData(queryObjectives, this.state.stretching.objectId, this.state.stretching.count);
+        this.setData(queryObjectives, this.state.swimming.objectId, this.state.swimming.count).then(
             Alert.alert('Mis à jour', 'Tes objectifs ont été mis à jour !')
         )
     }

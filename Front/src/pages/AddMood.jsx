@@ -56,7 +56,7 @@ class AddMood extends Component {
     }
 
     async getObjectives() {
-        const parseQuery = new Parse.Query('Objective');
+        const parseQuery = new Parse.Query('Sport');
         let allObjectives = await parseQuery.find();
         
         allObjectives.map( objective => {
@@ -67,7 +67,7 @@ class AddMood extends Component {
         queryUser.equalTo('objectId', this.state.user.objectId);
         const user = await queryUser.first();
 
-        const queryObjectives = new Parse.Query('UserDoneObjectives');
+        const queryObjectives = new Parse.Query('UserSport');
         queryObjectives.equalTo('user', user);
         let allUserObjectives = await queryObjectives.find();
         allUserObjectives.map( objective => {
@@ -78,26 +78,26 @@ class AddMood extends Component {
     }
 
     setData(objectId, isDoneAndExist) {
-        if (objectId == "c6Gu48b1dq") {
+        if (objectId == "nFWdpwVjm2") {
             this.setState({yoga: {done: isDoneAndExist, object: objective, alreadyExist: isDoneAndExist}})
         }
-        if (objectId == "DTGeTn2nCX") {
+        if (objectId == "CDqVZFz9Kc") {
             this.setState({running: {done: isDoneAndExist, object: objective, alreadyExist: isDoneAndExist}})
         }
-        if (objectId == "iV1PxwfqMY") {
+        if (objectId == "3l5p3epzkV") {
             this.setState({walking: {done: isDoneAndExist, object: objective, alreadyExist: isDoneAndExist}})
         }
-        if (oobjectId == "729vYBdUZA") {
+        if (oobjectId == "oS7M0wsZyI") {
             this.setState({stretching: {done: isDoneAndExist, object: objective, alreadyExist: isDoneAndExist}})
         }
-        if (objectId == "HR1WFb8TRc") {
+        if (objectId == "k0lodPtJwt") {
             this.setState({swimming: {done: isDoneAndExist, object: objective, alreadyExist: isDoneAndExist}})
         }
     }
 
     async createNewObjectiveDone(user, objective) {
         if (objective.alreadyExist == false) {
-            let newObjectiveDone = new Parse.Object('UserDoneObjectives');
+            let newObjectiveDone = new Parse.Object('UserSport');
             newObjectiveDone.set('user', user);
             newObjectiveDone.set('date', this.props.selectedDate);
             newObjectiveDone.set('objective', objective.object);
