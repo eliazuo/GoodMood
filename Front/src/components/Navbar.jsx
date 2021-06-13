@@ -38,21 +38,24 @@ class Navbar extends Component {
                 >
 
                     <Tab.Screen name="CalendarPage"
-                                children={()=><CalendarPage navigation={this.props.navigation}/>}
+                                children={()=><CalendarPage navigation={this.props.navigation} toUpdate={Math.random()}/>}
                                 options={{
                                     tabBarIcon: ({ focused, color, size }) => (
                                         <Ionicons name="md-calendar-sharp" color={color} size={size}/>
                                     ),
+                                    
                                 }}
                     />
-                    <Tab.Screen name="Statistics" component={Statistics} 
+                    <Tab.Screen name="Statistics"
+                                children={()=><Statistics navigation={this.props.navigation} toUpdate={Math.random()}/>}
                                 options={{
                                     tabBarIcon: ({ focused, color, size }) => (
                                         <Foundation name="graph-bar" color={color} size={size}/>
                                     ),
                                 }}
                     />
-                    <Tab.Screen name="Objectives" component={Objectives} 
+                    <Tab.Screen name="Objectives"
+                                children={()=><Objectives navigation={this.props.navigation} toUpdate={Math.random()}/>}
                                 options={{
                                     tabBarIcon: ({ focused, color, size }) => (
                                         <Foundation name="target" color={color} size={size}/>
@@ -60,6 +63,7 @@ class Navbar extends Component {
                                 }}
                     />
                     <Tab.Screen name="Documentation" component={Documentation} 
+                                
                                 options={{
                                     tabBarIcon: ({ focused, color, size }) => (
                                         <Ionicons name="book-outline" color={color} size={size}/>
@@ -67,6 +71,7 @@ class Navbar extends Component {
                                 }}
                     />
                     <Tab.Screen name="Contact" component={Contact} 
+                                
                                 options={{
                                     tabBarIcon: ({ focused, color, size }) => (
                                         <Ionicons name="chatbubbles-outline" color={color} size={size}/>

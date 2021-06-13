@@ -37,6 +37,9 @@ class ChartObjectives extends Component {
                 selectedMonth: (this.props.selectedMonth.getMonth() + 1 < 10 ? "0" + (this.props.selectedMonth.getMonth() + 1) : (this.props.selectedMonth.getMonth() + 1)) + "-" + this.props.selectedMonth.getFullYear(),
             })
         }
+        if (this.props.toUpdate !== prevProps.toUpdate) {
+            this.retrieveUserObjectives();
+        }
     }
 
     retrieveUserObjectives(){

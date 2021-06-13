@@ -15,8 +15,7 @@ class CalendarPage extends Component {
             user: {},
             userMoodList: [],
             colorsByFeelings: {},
-            calendarMarkedDatesUserMood: {},
-            needUpdate: false
+            calendarMarkedDatesUserMood: {}
         };
 
         AsyncStorage.getItem('user').then((user) => {
@@ -39,11 +38,11 @@ class CalendarPage extends Component {
         this.getUserMoodListCallback = this.getUserMoodListCallback.bind(this);
     }
 
-    // componentDidUpdate(prevProps) {
-    //     if (prevProps.isFocused !== this.props.isFocused) {
-    //         this.retrieveUserMoodList(); 
-    //     }
-    // }
+    componentDidUpdate(prevProps) {
+        if (prevProps.toUpdate != this.props.toUpdate) {
+            this.retrieveUserMoodList(); 
+        }
+    }
 
     retrieveUserMoodList(){
         this.getUserMoodList().then(data => 

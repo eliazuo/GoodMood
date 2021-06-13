@@ -11,6 +11,7 @@ class Statistics extends Component {
         super(props);
         this.state = { 
             selectedMonth: new Date(),
+            toUpdate: null
         };
 
         this.changeSelectedMonth = this.changeSelectedMonth.bind(this);
@@ -20,6 +21,12 @@ class Statistics extends Component {
         var date = this.state.selectedMonth;
         date.setMonth(date.getMonth() + shift);
         this.setState({ selectedMonth: date});
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.toUpdate != this.props.toUpdate) {
+            this.setState({toUpdate: this.props.toUpdate})
+        }
     }
 
     render() {
@@ -42,8 +49,8 @@ class Statistics extends Component {
                             onPress={() => this.changeSelectedMonth(1)}></Entypo>
                 </View>
 
-                <ChartMood selectedMonth={this.state.selectedMonth}/>
-                <ChartObjectives selectedMonth={this.state.selectedMonth}/>
+                <ChartMood selectedMonth={this.state.selectedMonth} toUpdate={this.state.toUpdate}/>
+                <ChartObjectives selectedMonth={this.state.selectedMonth} toUpdate={this.state.toUpdate}/>
             </ScrollView>
             
         );

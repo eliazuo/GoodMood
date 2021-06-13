@@ -42,6 +42,12 @@ class Objectives extends Component {
         this.setData = this.setData.bind(this);
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.toUpdate !== prevProps.toUpdate) {
+            this.getAllObjectives();
+        }
+    }
+
     async getAllObjectives() {
         const queryUser = new Parse.Query('_User');
         queryUser.equalTo('objectId', this.state.user.objectId);

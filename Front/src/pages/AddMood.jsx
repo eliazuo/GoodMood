@@ -72,7 +72,7 @@ class AddMood extends Component {
         let allUserObjectives = await queryObjectives.find();
         allUserObjectives.map( objective => {
             if (Moment(objective.get("date")).format('DD MMMM YYYY') == Moment(this.props.route.params.selectedDate).format('DD MMMM YYYY')) {
-                this.setData(objective, objective.get("objective").id, true);
+                this.setData(objective, objective.id, true);
             }
         })
     }
