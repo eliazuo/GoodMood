@@ -4,6 +4,7 @@ import { Button } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AntDesign } from '@expo/vector-icons';
 import Parse from "parse/react-native.js";
+import Moment from 'moment';
 import globalStyle from '../style/global.js';
 
 class Objectives extends Component {
@@ -96,27 +97,35 @@ class Objectives extends Component {
     }
 
     async updateData(){
+        const date = Moment(new Date()).format('DD-MM-YYYY');
+        let dateArray = date.split("-");
+        let dateString = dateArray[1] + "-01-" + dateArray[2] + ' 02:00:00';
 
         const queryObjectives = new Parse.Query('Objectives');
         queryObjectives.equalTo('objectId', this.state.yoga.objectId);
         const yoga = await queryObjectives.first();
         yoga.set('count', this.state.yoga.count);
+        yoga.set('date', new Date(dateString));
 
         queryObjectives.equalTo('objectId', this.state.running.objectId);
         const running = await queryObjectives.first();
         running.set('count', this.state.running.count);
+        running.set('date', new Date(dateString));
 
         queryObjectives.equalTo('objectId', this.state.walking.objectId);
         const walking = await queryObjectives.first();
         walking.set('count', this.state.walking.count);
+        walking.set('date', new Date(dateString));
 
         queryObjectives.equalTo('objectId', this.state.stretching.objectId);
         const stretching = await queryObjectives.first();
         stretching.set('count', this.state.stretching.count);
+        stretching.set('date', new Date(dateString));
 
         queryObjectives.equalTo('objectId', this.state.swimming.objectId);
         const swimming = await queryObjectives.first();
         swimming.set('count', this.state.swimming.count);
+        swimming.set('date', new Date(dateString));
 
         await yoga.save();
         await running.save();
