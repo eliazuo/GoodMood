@@ -16,7 +16,7 @@ class CalendarPage extends Component {
             userMoodList: [],
             colorsByFeelings: {},
             calendarMarkedDatesUserMood: {},
-            selectedDate: null
+            needUpdate: false
         };
 
         AsyncStorage.getItem('user').then((user) => {
@@ -38,6 +38,12 @@ class CalendarPage extends Component {
         this.buildCalendarUserMood = this.buildCalendarUserMood.bind(this);
         this.getUserMoodListCallback = this.getUserMoodListCallback.bind(this);
     }
+
+    // componentDidUpdate(prevProps) {
+    //     if (prevProps.isFocused !== this.props.isFocused) {
+    //         this.retrieveUserMoodList(); 
+    //     }
+    // }
 
     retrieveUserMoodList(){
         this.getUserMoodList().then(data => 
@@ -126,14 +132,11 @@ class CalendarPage extends Component {
     }
 
     handleDayClick(date){
-        console.log(date);
-        this.setState({selectedDate: date.dateString});
+        //this.setState({selectedDate: date.dateString});
+        this.props.navigation.navigate('AddMood',{ selectedDate: date.dateString });
     }
 
     render() {
-        if (this.state.selectedDate != null){
-            return (<AddMood selectedDate={this.state.selectedDate}></AddMood>)
-        }
         const win = Dimensions.get('window');
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', width:"100%"}}>

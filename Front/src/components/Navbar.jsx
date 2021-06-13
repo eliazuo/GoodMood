@@ -13,6 +13,17 @@ import { NavigationContainer } from '@react-navigation/native';
 
 
 class Navbar extends Component {
+    constructor(props) {
+        super(props);
+        // this.state = {
+        //     isCalendarSelected: true,
+        //     isStatisticsSelected: false,
+        //     isObjectivesSelected: false,
+        //     isDocumentationSelected: false,
+        //     isContactSelected: false,
+        // };
+
+    }
 
     render() {
         const Tab = createBottomTabNavigator();
@@ -26,7 +37,8 @@ class Navbar extends Component {
                                 }}}
                 >
 
-                    <Tab.Screen name="CalendarPage" component={CalendarPage} 
+                    <Tab.Screen name="CalendarPage"
+                                children={()=><CalendarPage navigation={this.props.navigation}/>}
                                 options={{
                                     tabBarIcon: ({ focused, color, size }) => (
                                         <Ionicons name="md-calendar-sharp" color={color} size={size}/>

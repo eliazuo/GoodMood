@@ -9,7 +9,7 @@ class MainApp extends Component {
     return (
         <>
             <Headerbar navigation={this.props.navigation}></Headerbar>
-            <Navbar></Navbar>
+            <Navbar navigation={this.props.navigation}></Navbar>
         </>
     );
   }

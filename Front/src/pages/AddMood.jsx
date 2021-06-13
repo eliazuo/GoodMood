@@ -5,7 +5,6 @@ import { Button } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Parse from "parse/react-native.js";
 import globalStyle from '../style/global.js';
-import CalendarPage from './CalendarPage';
 import Moment from 'moment';
 
 class AddMood extends Component {
@@ -49,6 +48,7 @@ class AddMood extends Component {
         AsyncStorage.getItem('user').then((user) => {
             this.setState({ user: JSON.parse(user) }, this.getTodayMood);
         })
+        
         this.updateData = this.updateData.bind(this);
         this.createNewObjectiveDone = this.createNewObjectiveDone.bind(this);
         this.setData = this.setData.bind(this);
@@ -60,7 +60,7 @@ class AddMood extends Component {
         let allObjectives = await parseQuery.find();
         
         allObjectives.map( objective => {
-            this.setData(objective.id, false);
+            this.setData(objective, objective.id, false);
         })
 
         const queryUser = new Parse.Query('_User');
@@ -71,13 +71,13 @@ class AddMood extends Component {
         queryObjectives.equalTo('user', user);
         let allUserObjectives = await queryObjectives.find();
         allUserObjectives.map( objective => {
-            if (Moment(objective.get("date")).format('DD MMMM YYYY') == Moment(this.props.selectedDate).format('DD MMMM YYYY')) {
-                this.setData(objective.get("objective").id, true);
+            if (Moment(objective.get("date")).format('DD MMMM YYYY') == Moment(this.props.route.params.selectedDate).format('DD MMMM YYYY')) {
+                this.setData(objective, objective.get("objective").id, true);
             }
         })
     }
 
-    setData(objectId, isDoneAndExist) {
+    setData(objective, objectId, isDoneAndExist) {
         if (objectId == "nFWdpwVjm2") {
             this.setState({yoga: {done: isDoneAndExist, object: objective, alreadyExist: isDoneAndExist}})
         }
@@ -87,7 +87,7 @@ class AddMood extends Component {
         if (objectId == "3l5p3epzkV") {
             this.setState({walking: {done: isDoneAndExist, object: objective, alreadyExist: isDoneAndExist}})
         }
-        if (oobjectId == "oS7M0wsZyI") {
+        if (objectId == "oS7M0wsZyI") {
             this.setState({stretching: {done: isDoneAndExist, object: objective, alreadyExist: isDoneAndExist}})
         }
         if (objectId == "k0lodPtJwt") {
@@ -99,8 +99,8 @@ class AddMood extends Component {
         if (objective.alreadyExist == false) {
             let newObjectiveDone = new Parse.Object('UserSport');
             newObjectiveDone.set('user', user);
-            newObjectiveDone.set('date', this.props.selectedDate);
-            newObjectiveDone.set('objective', objective.object);
+            newObjectiveDone.set('date', new Date(this.props.route.params.selectedDate));
+            newObjectiveDone.set('sport', objective.object);
             try {
                 await newObjectiveDone.save();
             } catch (error) {
@@ -120,7 +120,7 @@ class AddMood extends Component {
         let allFeelings = await queryUserFeeling.find();
 
         for (let feeling of allFeelings) {
-            if (Moment(feeling.get("date")).format('DD MMMM YYYY') == Moment(this.props.selectedDate).format('DD MMMM YYYY')) {
+            if (Moment(feeling.get("date")).format('DD MMMM YYYY') == Moment(this.props.route.params.selectedDate).format('DD MMMM YYYY')) {
                 const queryFeeling = new Parse.Query('Feeling');
                 queryFeeling.equalTo('objectId', feeling.get("feeling").id);
                 const feelingObject = await queryFeeling.first();
@@ -133,6 +133,7 @@ class AddMood extends Component {
         const queryUser = new Parse.Query('_User');
         queryUser.equalTo('objectId', this.state.user.objectId);
         const user = await queryUser.first();
+
         if( this.state.yoga.done == true) {
             await this.createNewObjectiveDone(user, this.state.yoga);
         }
@@ -156,7 +157,7 @@ class AddMood extends Component {
 
             let newFeeling = new Parse.Object('UserFeeling');
             newFeeling.set('user', user);
-            newFeeling.set('date', new Date(this.props.selectedDate));
+            newFeeling.set('date', new Date(this.props.route.params.selectedDate));
             newFeeling.set('feeling', feeling);
             try {
                 await newFeeling.save();
@@ -166,20 +167,21 @@ class AddMood extends Component {
             };
         }
         Alert.alert('Mis à jour', 'Tes données ont été mises à jour !')
+        this.props.navigation.navigate('MainApp', {needUpdate: true});
     }
 
     render() {
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <View style={{justifyContent: "flex-start", alignItems: "center", backgroundColor: "#dedede", padding: 15, margin: 10, borderRadius: 15, flexDirection: "row"}}>
-                    <Button 
+                    {/* <Button 
                         title="Retour"
                         buttonStyle={{ backgroundColor:  "white", borderRadius: 25 }}
                         titleStyle={{ color:  "#6a09b5", fontSize: 14, fontWeight: "bold" }}
                         onPress={() => <CalendarPage selectedDate={null}></CalendarPage>}
-                    />
+                    /> */}
                     <Text style={{color: "#6a09b5", fontSize: 16}}>
-                        {Moment(this.props.selectedDate).format('DD MMMM YYYY')}
+                        {Moment(this.props.route.params.selectedDate).format('DD MMMM YYYY')}
                     </Text>
                 </View>
 
