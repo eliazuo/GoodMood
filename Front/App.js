@@ -17,7 +17,7 @@ import AddMood from './src/pages/AddMood';
 import Parse from "parse/react-native.js";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 Parse.setAsyncStorage(AsyncStorage);
-Parse.initialize('RoRhb1PpZrY1KJPbzQoN1YUWFdnrlg73LVmgCrky','txUH94PNNTccgACKD3O4yoqNIb5jQzz0KNhRfJLS');
+Parse.initialize('cpVqyC9uBaoder5FGyqRD76HWaXB03EY2Hk1KD9v','BLHuZHLxvknOpPWZrO4vvqVgheyVDIAKTLf8uPZ2');
 Parse.serverURL = 'https://parseapi.back4app.com/';
 
 export default function App() {

@@ -69,7 +69,7 @@ class ContactList extends Component {
                 <View>
                     {this.state.contacts.map(contact =>
                         <View key={contact.get('objectId')} >
-                            <TouchableHighlight onPress={() => this.goToMessagingPage(contact)}>
+                            <TouchableHighlight underlayColor={'#4e4273'} onPress={() => this.goToMessagingPage(contact)}>
                                 <ContactCard 
                                             contact={contact}
                                             user={this.state.user}

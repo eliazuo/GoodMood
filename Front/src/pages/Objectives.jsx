@@ -113,8 +113,8 @@ class Objectives extends Component {
     async setData(queryObjectives, objectId, count) {
         const date = Moment(new Date()).format('DD-MM-YYYY');
         let dateArray = date.split("-");
-        //let dateString = dateArray[2] + "-" + dateArray[1] + "-01-T04:00:00.000Z";
-        let dateString = dateArray[1] + "-01-" + dateArray[2] + " 04:00:00";
+        let dateString = dateArray[2] + "-" + dateArray[1] + "-01T04:00:00.000Z";
+        //let dateString = dateArray[1] + "-01-" + dateArray[2] + " 04:00:00";
 
         let querySport = new Parse.Query('Sport');
         querySport.equalTo('objectId', objectId);

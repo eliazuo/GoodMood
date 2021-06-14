@@ -46,7 +46,7 @@ class AddMood extends Component {
         };
 
         AsyncStorage.getItem('user').then((user) => {
-            this.setState({ user: JSON.parse(user) }, this.getTodayMood);
+            this.setState({ user: JSON.parse(user) }, this.getTodayMood, this.getObjectives);
         })
         
         this.updateData = this.updateData.bind(this);
@@ -97,10 +97,14 @@ class AddMood extends Component {
 
     async createNewObjectiveDone(user, objective) {
         if (objective.alreadyExist == false) {
+            const querySport = new Parse.Query('Sport');
+            querySport.equalTo('objectId', objective.object.id);
+            const sport = await querySport.first();
+
             let newObjectiveDone = new Parse.Object('UserSport');
             newObjectiveDone.set('user', user);
             newObjectiveDone.set('date', new Date(this.props.route.params.selectedDate));
-            newObjectiveDone.set('sport', objective.object);
+            newObjectiveDone.set('sport', sport);
             try {
                 await newObjectiveDone.save();
             } catch (error) {
